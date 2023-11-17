@@ -6,13 +6,13 @@ import GameContext from "../ContextFile"
 
 export default function GameArea() {
 
-    const [holeOccuppied, , holes] = useContext(GameContext)
+    const [holesOccuppied, , holes, ] = useContext(GameContext)
 
 
     return (
         <div className="game-area border grid grid-rows-3 grid-flow-col">
             {holes.map((hole, index) => (
-                <Hole key={index} occupied={index === holeOccuppied} />
+                <Hole key={index} occupied={holesOccuppied[index]} />
             ))}
         </div>
     )

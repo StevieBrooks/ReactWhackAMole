@@ -44,16 +44,30 @@ const animalAudioArray = [
     {word: zebraMP3, name: "zebra"},
 ]
 
+let updatedHoles;
 
 // MAIN
 function App() {
 
-    const [holeOccupied, setHoleOccupied] = useState(null)
+    const [holesOccupied, setHolesOccupied] = useState(Array(9).fill(null))
 
     useEffect(() => {
         const intervalId = setInterval(() => {
-            const holePop = Math.floor(Math.random() * holes.length);
-            setHoleOccupied(holes[holePop]);
+
+            const numOfHoles = Math.ceil(Math.random() * 4)
+            let holesToPop = []
+            for(let i = 0; i < numOfHoles; i++) {
+                const holePop = Math.floor(Math.random() * holes.length)
+                holesToPop.push(holePop)
+            }
+            holesToPop = [...new Set(holesToPop)]
+            updatedHoles = [...holesOccupied]
+            holesToPop.forEach(item => {
+                return updatedHoles[item] = true
+            })
+            setHolesOccupied(updatedHoles)
+            
+
 
             const randomAnimalAudio = animalAudioArray[Math.floor(Math.random() * animalAudioArray.length)].word
             const audio = new Audio(randomAnimalAudio)
@@ -65,13 +79,15 @@ function App() {
         };
     }, []);
 
+    // console.log(holesOccupied)
+
   return (<>
     
         <div className="game-container border w-3/5 mx-auto relative top-8 bg-[#84cc16]">
 
             <Header h1Title="Whack-a-Mole" />
 
-            <GameContext.Provider value={[holeOccupied, setHoleOccupied, holes, animalArray]}>
+            <GameContext.Provider value={[holesOccupied, setHolesOccupied, holes, animalArray]}>
                 <TimeScore />
                 <GameArea />
             </GameContext.Provider>
@@ -84,3 +100,8 @@ function App() {
 }
 
 export default App;
+
+/**
+ * set random numbers of images to appear each time - between 1 and 5
+ * make onclick function for images in holes - check if it matches current audio word
+ */
