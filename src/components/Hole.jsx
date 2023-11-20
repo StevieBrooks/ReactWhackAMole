@@ -1,13 +1,14 @@
 import { useContext } from "react"
 import GameContext from "../ContextFile"
 
-export default function Hole( { occupied } ) {
+export default function Hole( { occupied, clickHandler } ) {
 
-    const [holesOccuppied, , holes, animalArray] = useContext(GameContext)
+    const [holesOccuppied, , holes, animalArray, randomAnimalAudio] = useContext(GameContext)
+
 
     return (
         <div className="hole border rounded-full w-16 h-16 bg-[#b45309] shadow-inner shadow-[#78350f]">
-            <img src={occupied && animalArray[Math.floor(Math.random() * animalArray.length)].icon} alt="" />
+            <img src={occupied && animalArray[Math.floor(Math.random() * animalArray.length)].icon} onClick={(e) => clickHandler(e)} alt="" />
         </div>
     )
 }

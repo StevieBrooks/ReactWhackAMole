@@ -50,6 +50,8 @@ let updatedHoles;
 function App() {
 
     const [holesOccupied, setHolesOccupied] = useState(Array(9).fill(null))
+    const [randomAnimalAudio, setRandomAnimalAudio] = useState()
+    const [points, setPoints] = useState(0)
 
     useEffect(() => {
         const intervalId = setInterval(() => {
@@ -66,20 +68,21 @@ function App() {
                 return updatedHoles[item] = true
             })
             setHolesOccupied(updatedHoles)
+
+            setRandomAnimalAudio(prevRandomAudio => {
+                const randomAnimalAudio = animalAudioArray[Math.floor(Math.random() * animalAudioArray.length)].word;
+                const audio = new Audio(randomAnimalAudio);
+                // audio.play();
+                return randomAnimalAudio;
+            });
             
-
-
-            const randomAnimalAudio = animalAudioArray[Math.floor(Math.random() * animalAudioArray.length)].word
-            const audio = new Audio(randomAnimalAudio)
-            // audio.play()
-        }, 2000);
+        }, 3000);
 
         return () => {
             clearInterval(intervalId);
         };
     }, []);
 
-    // console.log(holesOccupied)
 
   return (<>
     
@@ -87,7 +90,7 @@ function App() {
 
             <Header h1Title="Whack-a-Mole" />
 
-            <GameContext.Provider value={[holesOccupied, setHolesOccupied, holes, animalArray]}>
+            <GameContext.Provider value={[holesOccupied, setHolesOccupied, holes, animalArray, randomAnimalAudio, points, setPoints]}>
                 <TimeScore />
                 <GameArea />
             </GameContext.Provider>
@@ -101,7 +104,8 @@ function App() {
 
 export default App;
 
-/**
- * set random numbers of images to appear each time - between 1 and 5
- * make onclick function for images in holes - check if it matches current audio word
- */
+/*BUGS
+
+    - images change when one is clicked, need to make that img (or all) disappear until next set of images appears
+
+*/
