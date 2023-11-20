@@ -1,16 +1,14 @@
 import Hole from "./Hole"
 import Mole from "../images/mole.png"
-import { useContext, useEffect } from "react";
+import { useContext } from "react";
 import GameContext from "../ContextFile"
 
 export default function GameArea() {
 
-    const [holesOccuppied, , holes, animalArray, randomAnimalAudio, points, setPoints] = useContext(GameContext)
+    const [holesOccuppied, setHolesOccupied, holes, animalArray, randomAnimalAudio, points, setPoints] = useContext(GameContext)
     
     
     const imgClickHandler = (e) => {
-        console.log(e.target.parentElement.classList)
-        console.log(holesOccuppied)
 
         const regex = /\/(.*?)\./
         const match = randomAnimalAudio.match(regex)
@@ -22,21 +20,20 @@ export default function GameArea() {
         const imgWordToMatch = matchImgWord[1].split("/")
         const clickedImg = imgWordToMatch[4]
 
-        console.log(wordCall)
-        console.log(clickedImg)
+        // console.log(wordCall)
+        // console.log(clickedImg)
 
         if(wordCall === clickedImg) {
             setPoints(points => points+1)
         } else {
             setPoints(points => points-1)
         }
+
+        const holeToCancel = e.target.parentElement.classList[1]
+        const updatedHoles = [...holesOccuppied]
+        updatedHoles[holeToCancel] = null
+        setHolesOccupied(updatedHoles)
     }
-    
-    useEffect(() => {
-        console.log(points)
-        
-    }, [points])
-    
 
     return (
         <div className="game-area border grid grid-cols-3 grid-flow-row">

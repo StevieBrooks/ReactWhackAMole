@@ -106,6 +106,6 @@ export default App;
 
 /*BUGS
 
-    - images change when one is clicked, need to make that img (or all) disappear until next set of images appears
+    - images change when one is clicked, need to make that img (or all) disappear until next set of images appears 
 
 */
