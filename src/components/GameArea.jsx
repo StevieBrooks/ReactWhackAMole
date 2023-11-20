@@ -1,6 +1,6 @@
 import Hole from "./Hole"
 import Mole from "../images/mole.png"
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect } from "react";
 import GameContext from "../ContextFile"
 
 export default function GameArea() {
@@ -9,7 +9,8 @@ export default function GameArea() {
     
     
     const imgClickHandler = (e) => {
-        console.log(e.target)
+        console.log(e.target.parentElement.classList)
+        console.log(holesOccuppied)
 
         const regex = /\/(.*?)\./
         const match = randomAnimalAudio.match(regex)
@@ -38,9 +39,9 @@ export default function GameArea() {
     
 
     return (
-        <div className="game-area border grid grid-rows-3 grid-flow-col">
+        <div className="game-area border grid grid-cols-3 grid-flow-row">
             {holes.map((hole, index) => (
-                <Hole key={index} occupied={holesOccuppied[index]} clickHandler={imgClickHandler} />
+                <Hole key={index} id={index} occupied={holesOccuppied[index]} clickHandler={imgClickHandler} />
             ))}
         </div>
     )
