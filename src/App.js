@@ -9,6 +9,7 @@ import TimeScore from './components/TimeScore';
 import GameArea from './components/GameArea';
 import Footer from './components/Footer';
 import GameContext from "./ContextFile"
+import MenuCard from './components/MenuCard';
 
 
 // FILE IMPORTS
@@ -52,6 +53,7 @@ function App() {
     const [holesOccupied, setHolesOccupied] = useState(Array(9).fill(null))
     const [randomAnimalAudio, setRandomAnimalAudio] = useState()
     const [points, setPoints] = useState(0)
+    const [menuActive, setMenuActive] = useState(false)
 
     useEffect(() => {
         const intervalId = setInterval(() => {
@@ -86,16 +88,29 @@ function App() {
 
   return (<>
     
-        <div className="game-container border w-11/12 mx-auto relative top-8 bg-[#d4cc16]">
+        <div className="game-container border rounded w-11/12 h-96 mx-auto relative top-8 bg-[#64cc16]">
 
-            <Header h1Title="Whack-a-Mole" />
+            {menuActive ? 
+            <>
+                <GameContext.Provider value={[holesOccupied, setHolesOccupied, holes, animalArray, randomAnimalAudio, points, setPoints, menuActive, setMenuActive]}>
+                    <MenuCard />
+                </GameContext.Provider>
+            </>
+            :
+            <>
+                <Header h1Title="Whack-a-Mole" />
 
-            <GameContext.Provider value={[holesOccupied, setHolesOccupied, holes, animalArray, randomAnimalAudio, points, setPoints]}>
-                <TimeScore />
-                <GameArea />
-            </GameContext.Provider>
+                <GameContext.Provider value={[holesOccupied, setHolesOccupied, holes, animalArray, randomAnimalAudio, points, setPoints, menuActive, setMenuActive]}>
+                    <TimeScore />
+                    <GameArea />
+                    <Footer />
+                </GameContext.Provider>
 
-            <Footer />
+            </>
+            
+
+            }
+
 
         </div>
 
@@ -119,5 +134,6 @@ export default App;
 - multiplayer / single player - scores can be added to high-score db regardless of setting
 - everything displayed in game container - menu/reset confirmation conditionally
 - different voices/accents for noun calls
+- scoreboard choice in menu
 
 */
