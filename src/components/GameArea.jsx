@@ -36,7 +36,7 @@ export default function GameArea() {
     }
 
     return (
-        <div className="game-area border grid grid-cols-3 grid-flow-row">
+        <div className="game-area border grid grid-cols-3 grid-flow-row py-5">
             {holes.map((hole, index) => (
                 <Hole key={index} id={index} occupied={holesOccupied[index]} clickHandler={imgClickHandler} />
             ))}

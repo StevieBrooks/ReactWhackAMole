@@ -52,12 +52,9 @@ function App() {
     const [holesOccupied, setHolesOccupied] = useState(Array(9).fill(null))
     const [randomAnimalAudio, setRandomAnimalAudio] = useState()
     const [points, setPoints] = useState(0)
-    const [imgClicked, setImgClicked] = useState(false)
 
     useEffect(() => {
         const intervalId = setInterval(() => {
-
-            setImgClicked(false)
 
             const numOfHoles = Math.ceil(Math.random() * 4)
             let holesToPop = []
@@ -89,11 +86,11 @@ function App() {
 
   return (<>
     
-        <div className="game-container border w-3/5 mx-auto relative top-8 bg-[#84cc16]">
+        <div className="game-container border w-11/12 mx-auto relative top-8 bg-[#d4cc16]">
 
             <Header h1Title="Whack-a-Mole" />
 
-            <GameContext.Provider value={[holesOccupied, setHolesOccupied, holes, animalArray, randomAnimalAudio, points, setPoints, imgClicked, setImgClicked]}>
+            <GameContext.Provider value={[holesOccupied, setHolesOccupied, holes, animalArray, randomAnimalAudio, points, setPoints]}>
                 <TimeScore />
                 <GameArea />
             </GameContext.Provider>
@@ -107,8 +104,19 @@ function App() {
 
 export default App;
 
-/*BUGS
+/* ---- PLAN ----
 
-    - images change when one is clicked, need to make that img (or all) disappear until next set of images appears 
+1. Create menu with options - topic (this also determines theme), difficulty (this determines game duration & algorithm - i.e: how many times correct img shown), set player name, single/multi
+
+2. Set up Play button. If clicked immediately, game level easy
+
+3. Do reset button
+
+*/
+
+/* ---- IDEAS ----
+
+- multiplayer / single player - scores can be added to high-score db regardless of setting
+- everything displayed in game container - menu/reset confirmation conditionally
 
 */
