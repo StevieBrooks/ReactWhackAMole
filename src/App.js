@@ -118,5 +118,6 @@ export default App;
 
 - multiplayer / single player - scores can be added to high-score db regardless of setting
 - everything displayed in game container - menu/reset confirmation conditionally
+- different voices/accents for noun calls
 
 */
