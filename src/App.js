@@ -52,9 +52,12 @@ function App() {
     const [holesOccupied, setHolesOccupied] = useState(Array(9).fill(null))
     const [randomAnimalAudio, setRandomAnimalAudio] = useState()
     const [points, setPoints] = useState(0)
+    const [imgClicked, setImgClicked] = useState(false)
 
     useEffect(() => {
         const intervalId = setInterval(() => {
+
+            setImgClicked(false)
 
             const numOfHoles = Math.ceil(Math.random() * 4)
             let holesToPop = []
@@ -90,7 +93,7 @@ function App() {
 
             <Header h1Title="Whack-a-Mole" />
 
-            <GameContext.Provider value={[holesOccupied, setHolesOccupied, holes, animalArray, randomAnimalAudio, points, setPoints]}>
+            <GameContext.Provider value={[holesOccupied, setHolesOccupied, holes, animalArray, randomAnimalAudio, points, setPoints, imgClicked, setImgClicked]}>
                 <TimeScore />
                 <GameArea />
             </GameContext.Provider>

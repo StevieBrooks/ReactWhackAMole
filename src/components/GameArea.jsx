@@ -5,7 +5,7 @@ import GameContext from "../ContextFile"
 
 export default function GameArea() {
 
-    const [holesOccuppied, setHolesOccupied, holes, animalArray, randomAnimalAudio, points, setPoints] = useContext(GameContext)
+    const [holesOccupied, setHolesOccupied, holes, animalArray, randomAnimalAudio, points, setPoints] = useContext(GameContext)
     
     
     const imgClickHandler = (e) => {
@@ -21,7 +21,7 @@ export default function GameArea() {
         const clickedImg = imgWordToMatch[4]
 
         // console.log(wordCall)
-        // console.log(clickedImg)
+        // console.log(holesOccupied)
 
         if(wordCall === clickedImg) {
             setPoints(points => points+1)
@@ -30,7 +30,7 @@ export default function GameArea() {
         }
 
         const holeToCancel = e.target.parentElement.classList[1]
-        const updatedHoles = [...holesOccuppied]
+        const updatedHoles = [...holesOccupied]
         updatedHoles[holeToCancel] = null
         setHolesOccupied(updatedHoles)
     }
@@ -38,7 +38,7 @@ export default function GameArea() {
     return (
         <div className="game-area border grid grid-cols-3 grid-flow-row">
             {holes.map((hole, index) => (
-                <Hole key={index} id={index} occupied={holesOccuppied[index]} clickHandler={imgClickHandler} />
+                <Hole key={index} id={index} occupied={holesOccupied[index]} clickHandler={imgClickHandler} />
             ))}
         </div>
     )
