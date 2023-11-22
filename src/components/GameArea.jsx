@@ -5,7 +5,7 @@ import GameContext from "../ContextFile"
 
 export default function GameArea() {
 
-    const [holesOccupied, setHolesOccupied, holes, animalArray, randomAnimalAudio, points, setPoints] = useContext(GameContext)
+    const [holesOccupied, setHolesOccupied, holes, animalArray, randomAnimalAudio, points, setPoints, menuActive, setMenuActive, playerName, setPlayerName, gameTopic, setGameTopic, gameDifficulty, setGameDifficulty] = useContext(GameContext)
     
     
     const imgClickHandler = (e) => {

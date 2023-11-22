@@ -54,6 +54,9 @@ function App() {
     const [randomAnimalAudio, setRandomAnimalAudio] = useState()
     const [points, setPoints] = useState(0)
     const [menuActive, setMenuActive] = useState(false)
+    const [playerName, setPlayerName] = useState("")
+    const [gameTopic, setGameTopic] = useState("")
+    const [gameDifficulty, setGameDifficulty] = useState("")
 
     useEffect(() => {
         const intervalId = setInterval(() => {
@@ -85,14 +88,13 @@ function App() {
         };
     }, []);
 
-
   return (<>
     
         <div className="game-container border rounded w-11/12 h-96 mx-auto relative top-8 bg-[#64cc16]">
 
             {menuActive ? 
             <>
-                <GameContext.Provider value={[holesOccupied, setHolesOccupied, holes, animalArray, randomAnimalAudio, points, setPoints, menuActive, setMenuActive]}>
+                <GameContext.Provider value={[holesOccupied, setHolesOccupied, holes, animalArray, randomAnimalAudio, points, setPoints, menuActive, setMenuActive, playerName, setPlayerName, gameTopic, setGameTopic, gameDifficulty, setGameDifficulty]}>
                     <MenuCard />
                 </GameContext.Provider>
             </>
@@ -100,7 +102,7 @@ function App() {
             <>
                 <Header h1Title="Whack-a-Mole" />
 
-                <GameContext.Provider value={[holesOccupied, setHolesOccupied, holes, animalArray, randomAnimalAudio, points, setPoints, menuActive, setMenuActive]}>
+                <GameContext.Provider value={[holesOccupied, setHolesOccupied, holes, animalArray, randomAnimalAudio, points, setPoints, menuActive, setMenuActive, playerName, setPlayerName, gameTopic, setGameTopic, gameDifficulty, setGameDifficulty]}>
                     <TimeScore />
                     <GameArea />
                     <Footer />
@@ -119,15 +121,7 @@ function App() {
 
 export default App;
 
-/* ---- PLAN ----
-
-1. Create menu with options - topic (this also determines theme), difficulty (this determines game duration & algorithm - i.e: how many times correct img shown), set player name, single/multi
-
-2. Set up Play button. If clicked immediately, game level easy
-
-3. Do reset button
-
-*/
+/*TOMOZ - MAKE COUNTDOWN TIMER AND SET FOR DIFFERENT TIMES DEPENDING ON DIFFICULTY LEVEL CHOSEN, CAN ALTER LATER IF NEEDED */
 
 /* ---- IDEAS ----
 
@@ -135,5 +129,6 @@ export default App;
 - everything displayed in game container - menu/reset confirmation conditionally
 - different voices/accents for noun calls
 - scoreboard choice in menu
+- give holes numbers 1-9 - kids will love shouting that out to their mates who are playing in class
 
 */
