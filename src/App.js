@@ -50,6 +50,7 @@ let updatedHoles;
 // MAIN
 function App() {
 
+// STATE FOR GAME CONTEXT
     const [holesOccupied, setHolesOccupied] = useState(Array(9).fill(null))
     const [randomAnimalAudio, setRandomAnimalAudio] = useState()
     const [points, setPoints] = useState(0)
@@ -57,6 +58,9 @@ function App() {
     const [playerName, setPlayerName] = useState("")
     const [gameTopic, setGameTopic] = useState("")
     const [gameDifficulty, setGameDifficulty] = useState("")
+    const [gameTime, setGameTime] = useState()
+
+
 
     useEffect(() => {
         const intervalId = setInterval(() => {
@@ -88,13 +92,56 @@ function App() {
         };
     }, []);
 
+    useEffect(() => {
+        setGameTime(function() {
+            if(gameDifficulty === "Hard") {
+                return "1:00"
+            } else if(gameDifficulty === "Medium") {
+                return "2:00"
+            } else {
+                return "3:00"
+            }
+        })
+    }, [gameDifficulty])
+
+
+// COUNTDOWN FUNCTIONALITY
+    const [cdActive, setCdActive] = useState(false)
+
+    let interval;
+    const countdownFunction = (time) => {
+        let [minutes, seconds] = time.split(":").map(Number)
+
+        if(cdActive) {
+            
+        } else {
+            setCdActive(true)
+            interval = setInterval(function() {
+                seconds--
+                if(seconds < 0) {
+                    minutes--
+                    seconds = 59
+                }
+    
+                if(minutes === 0 && seconds === 0) {
+                    clearInterval(interval)
+                    setCdActive(false)
+                }
+    
+                let formattedSeconds = seconds < 10 ? "0" + seconds : seconds
+                setGameTime(String(minutes + ":" + formattedSeconds))
+            }, 1000)
+        }
+        
+    }
+
   return (<>
     
         <div className="game-container border rounded w-11/12 h-96 mx-auto relative top-8 bg-[#64cc16]">
 
             {menuActive ? 
             <>
-                <GameContext.Provider value={[holesOccupied, setHolesOccupied, holes, animalArray, randomAnimalAudio, points, setPoints, menuActive, setMenuActive, playerName, setPlayerName, gameTopic, setGameTopic, gameDifficulty, setGameDifficulty]}>
+                <GameContext.Provider value={[holesOccupied, setHolesOccupied, holes, animalArray, randomAnimalAudio, points, setPoints, menuActive, setMenuActive, playerName, setPlayerName, gameTopic, setGameTopic, gameDifficulty, setGameDifficulty, gameTime, setGameTime]}>
                     <MenuCard />
                 </GameContext.Provider>
             </>
@@ -102,10 +149,10 @@ function App() {
             <>
                 <Header h1Title="Whack-a-Mole" />
 
-                <GameContext.Provider value={[holesOccupied, setHolesOccupied, holes, animalArray, randomAnimalAudio, points, setPoints, menuActive, setMenuActive, playerName, setPlayerName, gameTopic, setGameTopic, gameDifficulty, setGameDifficulty]}>
+                <GameContext.Provider value={[holesOccupied, setHolesOccupied, holes, animalArray, randomAnimalAudio, points, setPoints, menuActive, setMenuActive, playerName, setPlayerName, gameTopic, setGameTopic, gameDifficulty, setGameDifficulty, gameTime, setGameTime]}>
                     <TimeScore />
                     <GameArea />
-                    <Footer />
+                    <Footer countdownFunction={countdownFunction} />
                 </GameContext.Provider>
 
             </>
@@ -121,7 +168,6 @@ function App() {
 
 export default App;
 
-/*TOMOZ - MAKE COUNTDOWN TIMER AND SET FOR DIFFERENT TIMES DEPENDING ON DIFFICULTY LEVEL CHOSEN, CAN ALTER LATER IF NEEDED */
 
 /* ---- IDEAS ----
 

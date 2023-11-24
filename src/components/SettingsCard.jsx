@@ -3,7 +3,7 @@ import GameContext from "../ContextFile"
 
 export default function SettingsCard( { cardActive, setCardActive } ) {
 
-    const [holesOccupied, setHolesOccupied, holes, animalArray, randomAnimalAudio, points, setPoints, menuActive, setMenuActive, playerName, setPlayerName, gameTopic, setGameTopic, gameDifficulty, setGameDifficulty] = useContext(GameContext)
+    const [holesOccupied, setHolesOccupied, holes, animalArray, randomAnimalAudio, points, setPoints, menuActive, setMenuActive, playerName, setPlayerName, gameTopic, setGameTopic, gameDifficulty, setGameDifficulty, gameTime, setGameTime] = useContext(GameContext)
 
     const [formPlayer, setFormPlayer] = useState("")
     const [formTopic, setFormTopic] = useState("")

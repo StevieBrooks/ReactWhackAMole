@@ -1,10 +1,15 @@
 import Button from "./Button"
-import { useContext } from "react"
+import { useContext, useState } from "react"
 import GameContext from "../ContextFile"
 
-export default function Footer() {
+export default function Footer({countdownFunction}) {
 
-    const [holesOccupied, setHolesOccupied, holes, animalArray, randomAnimalAudio, points, setPoints, menuActive, setMenuActive] = useContext(GameContext)
+    const [holesOccupied, setHolesOccupied, holes, animalArray, randomAnimalAudio, points, setPoints, menuActive, setMenuActive, playerName, setPlayerName, gameTopic, setGameTopic, gameDifficulty, setGameDifficulty, gameTime, setGameTime] = useContext(GameContext)
+
+    
+
+    
+    
 
     const menuFunction = () => {
         setMenuActive(true)
@@ -13,7 +18,7 @@ export default function Footer() {
     return (
 
         <footer className="border flex justify-evenly">
-            <Button btnTitle="Play" className="py-1 px-2 m-1 border" />
+            <Button btnTitle="Play" btnAction={() => countdownFunction(gameTime)} className="py-1 px-2 m-1 border" />
             <Button btnTitle="Reset" className="py-1 px-2 m-1 border" />
             <Button btnTitle="Menu" btnAction={menuFunction} className="py-1 px-2 m-1 border" />
         </footer>
