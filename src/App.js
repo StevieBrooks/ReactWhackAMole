@@ -59,6 +59,7 @@ function App() {
     const [gameTopic, setGameTopic] = useState("")
     const [gameDifficulty, setGameDifficulty] = useState("")
     const [gameTime, setGameTime] = useState()
+    const [gameInterval, setGameInterval] = useState()
 
 
 
@@ -102,7 +103,18 @@ function App() {
                 return "3:00"
             }
         })
+
+        // setGameInterval(function() {
+        //     if(gameDifficulty === "Hard") {
+        //         return 1500
+        //     } else if(gameDifficulty === "Medium") {
+        //         return 3000
+        //     } else {
+        //         return 5000
+        //     }
+        // })
     }, [gameDifficulty])
+    // may need useRef to make this work without hiccups
 
 
 // COUNTDOWN FUNCTIONALITY
@@ -168,6 +180,12 @@ function App() {
 
 export default App;
 
+/* MONDAY TASKLIST
+    - learn useRef to handle intervalID duration issue
+    - stop countdown whenever reset or menu buttons clicked
+    - develop algorithm to handle amount of correct images appear per game
+*/
+
 
 /* ---- IDEAS ----
 
@@ -177,4 +195,8 @@ export default App;
 - scoreboard choice in menu
 - give holes numbers 1-9 - kids will love shouting that out to their mates who are playing in class
 
+*/
+
+/* BUGS
+    - some images will remain stuck in same holes for ages
 */
