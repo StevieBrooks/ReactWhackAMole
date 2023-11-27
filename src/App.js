@@ -45,9 +45,10 @@ const animalAudioArray = [
     {word: zebraMP3, name: "zebra"},
 ]
 
-let updatedHoles;
 
 // MAIN
+let updatedHoles;
+
 function App() {
 
 // STATE FOR GAME CONTEXT
@@ -61,8 +62,6 @@ function App() {
     const [gameTime, setGameTime] = useState()
     let gameInterval = useRef(5000)
 
-    // console.log(gameInterval)
-
     useEffect(() => {
         const intervalId = setInterval(() => {
 
@@ -72,13 +71,15 @@ function App() {
                 const holePop = Math.floor(Math.random() * holes.length)
                 holesToPop.push(holePop)
             }
-            // look at this in depth to find out why more holes being changed than 4
+
             holesToPop = [...new Set(holesToPop)]
-            updatedHoles = [...holesOccupied]
+            updatedHoles = Array(9).fill(null)
             holesToPop.forEach(item => {
                 return updatedHoles[item] = true
             })
             setHolesOccupied(updatedHoles)
+
+
 
             setRandomAnimalAudio(prevRandomAudio => {
                 const randomAnimalAudio = animalAudioArray[Math.floor(Math.random() * animalAudioArray.length)].word;
@@ -118,8 +119,8 @@ function App() {
         }
 
     }, [gameDifficulty])
-    // may need useRef to make this work without hiccups
 
+    
 
 // COUNTDOWN FUNCTIONALITY
     const [cdActive, setCdActive] = useState(false)
