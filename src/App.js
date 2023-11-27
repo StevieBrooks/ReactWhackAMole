@@ -1,6 +1,6 @@
 // MISC IMPORTS
 import './App.css';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 
 
 // COMPONENT IMPORTS
@@ -59,9 +59,9 @@ function App() {
     const [gameTopic, setGameTopic] = useState("")
     const [gameDifficulty, setGameDifficulty] = useState("")
     const [gameTime, setGameTime] = useState()
-    const [gameInterval, setGameInterval] = useState()
+    let gameInterval = useRef(5000)
 
-
+    // console.log(gameInterval)
 
     useEffect(() => {
         const intervalId = setInterval(() => {
@@ -72,6 +72,7 @@ function App() {
                 const holePop = Math.floor(Math.random() * holes.length)
                 holesToPop.push(holePop)
             }
+            // look at this in depth to find out why more holes being changed than 4
             holesToPop = [...new Set(holesToPop)]
             updatedHoles = [...holesOccupied]
             holesToPop.forEach(item => {
@@ -86,12 +87,12 @@ function App() {
                 return randomAnimalAudio;
             });
             
-        }, 3000);
+        }, gameInterval.current);
 
         return () => {
             clearInterval(intervalId);
         };
-    }, []);
+    }, [gameInterval.current]);
 
     useEffect(() => {
         setGameTime(function() {
@@ -104,15 +105,18 @@ function App() {
             }
         })
 
-        // setGameInterval(function() {
-        //     if(gameDifficulty === "Hard") {
-        //         return 1500
-        //     } else if(gameDifficulty === "Medium") {
-        //         return 3000
-        //     } else {
-        //         return 5000
-        //     }
-        // })
+        switch(gameDifficulty) {
+            case "Hard":
+                gameInterval.current = 1500;
+                break;
+            case "Medium":
+                gameInterval.current = 3000;
+                break;
+            case "Easy":
+                gameInterval.current = 5000;
+                break;
+        }
+
     }, [gameDifficulty])
     // may need useRef to make this work without hiccups
 
@@ -181,7 +185,6 @@ function App() {
 export default App;
 
 /* MONDAY TASKLIST
-    - learn useRef to handle intervalID duration issue
     - stop countdown whenever reset or menu buttons clicked
     - develop algorithm to handle amount of correct images appear per game
 */
