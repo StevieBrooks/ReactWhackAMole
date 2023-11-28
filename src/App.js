@@ -51,7 +51,7 @@ let updatedHoles;
 
 function App() {
 
-// STATE FOR GAME CONTEXT
+// STATE 
     const [holesOccupied, setHolesOccupied] = useState(Array(9).fill(null))
     const [randomAnimalAudio, setRandomAnimalAudio] = useState()
     const [points, setPoints] = useState(0)
@@ -60,6 +60,8 @@ function App() {
     const [gameTopic, setGameTopic] = useState("")
     const [gameDifficulty, setGameDifficulty] = useState("")
     const [gameTime, setGameTime] = useState()
+    const [cdActive, setCdActive] = useState(false)
+
     let gameInterval = useRef(5000)
 
     useEffect(() => {
@@ -93,7 +95,8 @@ function App() {
         return () => {
             clearInterval(intervalId);
         };
-    }, [gameInterval.current]);
+    }, [gameInterval.current, cdActive]);
+
 
     useEffect(() => {
         setGameTime(function() {
@@ -108,7 +111,7 @@ function App() {
 
         switch(gameDifficulty) {
             case "Hard":
-                gameInterval.current = 1500;
+                gameInterval.current = 2000;
                 break;
             case "Medium":
                 gameInterval.current = 3000;
@@ -123,17 +126,16 @@ function App() {
     
 
 // COUNTDOWN FUNCTIONALITY
-    const [cdActive, setCdActive] = useState(false)
 
-    let interval;
-    const countdownFunction = (time) => {
-        let [minutes, seconds] = time.split(":").map(Number)
+    let countdownInterval;
+    const countdownFunction = () => {
+        setCdActive(true)
+    }
 
+    useEffect(() => {
         if(cdActive) {
-            
-        } else {
-            setCdActive(true)
-            interval = setInterval(function() {
+            let [minutes, seconds] = gameTime.split(":").map(Number)
+            countdownInterval = setInterval(function() {
                 seconds--
                 if(seconds < 0) {
                     minutes--
@@ -141,15 +143,37 @@ function App() {
                 }
     
                 if(minutes === 0 && seconds === 0) {
-                    clearInterval(interval)
+                    clearInterval(countdownInterval)
                     setCdActive(false)
                 }
     
                 let formattedSeconds = seconds < 10 ? "0" + seconds : seconds
                 setGameTime(String(minutes + ":" + formattedSeconds))
             }, 1000)
+            return () => clearInterval(countdownInterval)
+        } else {
+            clearInterval(countdownInterval)
+            setGameTime(function() {
+                if(gameDifficulty === "Hard") {
+                    return "1:00"
+                } else if(gameDifficulty === "Medium") {
+                    return "2:00"
+                } else {
+                    return "3:00"
+                }
+            })
+            
+            
         }
-        
+    }, [cdActive, gameTime])
+
+    const resetFunction = () => {
+        setCdActive(false)
+    }
+
+    const menuFunction = () => {
+        setMenuActive(true)
+        setCdActive(false)
     }
 
   return (<>
@@ -169,7 +193,7 @@ function App() {
                 <GameContext.Provider value={[holesOccupied, setHolesOccupied, holes, animalArray, randomAnimalAudio, points, setPoints, menuActive, setMenuActive, playerName, setPlayerName, gameTopic, setGameTopic, gameDifficulty, setGameDifficulty, gameTime, setGameTime]}>
                     <TimeScore />
                     <GameArea />
-                    <Footer countdownFunction={countdownFunction} />
+                    <Footer countdownFunction={countdownFunction} resetFunction={resetFunction} menuFunction={menuFunction} />
                 </GameContext.Provider>
 
             </>
@@ -186,7 +210,6 @@ function App() {
 export default App;
 
 /* MONDAY TASKLIST
-    - stop countdown whenever reset or menu buttons clicked
     - develop algorithm to handle amount of correct images appear per game
 */
 
