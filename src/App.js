@@ -24,6 +24,7 @@ import birdMP3 from "./audio/bird.mp3"
 import catMP3 from "./audio/cat.mp3"
 import dogMP3 from "./audio/dog.mp3"
 import zebraMP3 from "./audio/zebra.mp3"
+import ScoreForm from './components/ScoreForm';
 
 
 // GLOBAL VARIABLES, ARRAYS, ETC
@@ -61,28 +62,40 @@ function App() {
     const [gameDifficulty, setGameDifficulty] = useState("")
     const [gameTime, setGameTime] = useState()
     const [cdActive, setCdActive] = useState(false)
+    const [scoreFormActive, setScoreFormActive] = useState(false)
 
     let gameInterval = useRef(5000)
 
+/* FOR ALGORITHM
+    - needs to be specific amount of correct images per game difficulty
+    - needs to be at least one correct image per call (to keep interesting)
+    - click two correct images per call - double points
+*/
+
+
+// GAME BEGINS ONLY WHEN COUNTDOWN IS ACTIVE
     useEffect(() => {
+        // const max = 5
+        // const min = 2
         if(cdActive) {
             const intervalId = setInterval(() => {
 
-                const numOfHoles = Math.ceil(Math.random() * 4)
+                const numOfHoles = Math.ceil(Math.random() * 5)
+                // console.log(numOfHoles)
                 let holesToPop = []
                 for(let i = 0; i < numOfHoles; i++) {
                     const holePop = Math.floor(Math.random() * holes.length)
                     holesToPop.push(holePop)
                 }
     
+                // this new holeToPop array isn't same amt as numOfHoles because dupes have been removed. Need to add in new values and also make sure numOfHoles is between 2 and 5...then work on algorithm.
+                
                 holesToPop = [...new Set(holesToPop)]
                 updatedHoles = Array(9).fill(null)
                 holesToPop.forEach(item => {
                     return updatedHoles[item] = true
                 })
                 setHolesOccupied(updatedHoles)
-    
-    
     
                 setRandomAnimalAudio(prevRandomAudio => {
                     const randomAnimalAudio = animalAudioArray[Math.floor(Math.random() * animalAudioArray.length)].word;
@@ -133,7 +146,6 @@ function App() {
     let countdownInterval;
     const countdownFunction = () => {
         setCdActive(true)
-        // need to make intervalId start only when this clicked...and end when other buttons clicked
     }
 
     useEffect(() => {
@@ -149,6 +161,10 @@ function App() {
                 if(minutes === 0 && seconds === 0) {
                     clearInterval(countdownInterval)
                     setCdActive(false)
+                    setTimeout(function() {
+                        setHolesOccupied(Array(9).fill(null))
+                        setScoreFormActive(true)
+                    }, gameInterval.current)
                 }
     
                 let formattedSeconds = seconds < 10 ? "0" + seconds : seconds
@@ -159,7 +175,7 @@ function App() {
             clearInterval(countdownInterval)
             setGameTime(function() {
                 if(gameDifficulty === "Hard") {
-                    return "1:00"
+                    return "0:10"
                 } else if(gameDifficulty === "Medium") {
                     return "2:00"
                 } else {
@@ -190,15 +206,21 @@ function App() {
 
             {menuActive ? 
             <>
-                <GameContext.Provider value={[holesOccupied, setHolesOccupied, holes, animalArray, randomAnimalAudio, points, setPoints, menuActive, setMenuActive, playerName, setPlayerName, gameTopic, setGameTopic, gameDifficulty, setGameDifficulty, gameTime, setGameTime]}>
+                <GameContext.Provider value={[holesOccupied, setHolesOccupied, holes, animalArray, randomAnimalAudio, points, setPoints, menuActive, setMenuActive, playerName, setPlayerName, gameTopic, setGameTopic, gameDifficulty, setGameDifficulty, gameTime, setGameTime, cdActive, setCdActive, scoreFormActive, setScoreFormActive]}>
                     <MenuCard />
+                </GameContext.Provider>
+            </>
+            : scoreFormActive ? 
+            <>
+                <GameContext.Provider value={[holesOccupied, setHolesOccupied, holes, animalArray, randomAnimalAudio, points, setPoints, menuActive, setMenuActive, playerName, setPlayerName, gameTopic, setGameTopic, gameDifficulty, setGameDifficulty, gameTime, setGameTime, cdActive, setCdActive, scoreFormActive, setScoreFormActive]}>
+                    <ScoreForm />
                 </GameContext.Provider>
             </>
             :
             <>
                 <Header h1Title="Whack-a-Mole" />
 
-                <GameContext.Provider value={[holesOccupied, setHolesOccupied, holes, animalArray, randomAnimalAudio, points, setPoints, menuActive, setMenuActive, playerName, setPlayerName, gameTopic, setGameTopic, gameDifficulty, setGameDifficulty, gameTime, setGameTime]}>
+                <GameContext.Provider value={[holesOccupied, setHolesOccupied, holes, animalArray, randomAnimalAudio, points, setPoints, menuActive, setMenuActive, playerName, setPlayerName, gameTopic, setGameTopic, gameDifficulty, setGameDifficulty, gameTime, setGameTime, cdActive, setCdActive, scoreFormActive, setScoreFormActive]}>
                     <TimeScore />
                     <GameArea />
                     <Footer countdownFunction={countdownFunction} resetFunction={resetFunction} menuFunction={menuFunction} />
