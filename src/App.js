@@ -65,36 +65,39 @@ function App() {
     let gameInterval = useRef(5000)
 
     useEffect(() => {
-        const intervalId = setInterval(() => {
+        if(cdActive) {
+            const intervalId = setInterval(() => {
 
-            const numOfHoles = Math.ceil(Math.random() * 4)
-            let holesToPop = []
-            for(let i = 0; i < numOfHoles; i++) {
-                const holePop = Math.floor(Math.random() * holes.length)
-                holesToPop.push(holePop)
-            }
-
-            holesToPop = [...new Set(holesToPop)]
-            updatedHoles = Array(9).fill(null)
-            holesToPop.forEach(item => {
-                return updatedHoles[item] = true
-            })
-            setHolesOccupied(updatedHoles)
-
-
-
-            setRandomAnimalAudio(prevRandomAudio => {
-                const randomAnimalAudio = animalAudioArray[Math.floor(Math.random() * animalAudioArray.length)].word;
-                const audio = new Audio(randomAnimalAudio);
-                // audio.play();
-                return randomAnimalAudio;
-            });
-            
-        }, gameInterval.current);
-
-        return () => {
-            clearInterval(intervalId);
-        };
+                const numOfHoles = Math.ceil(Math.random() * 4)
+                let holesToPop = []
+                for(let i = 0; i < numOfHoles; i++) {
+                    const holePop = Math.floor(Math.random() * holes.length)
+                    holesToPop.push(holePop)
+                }
+    
+                holesToPop = [...new Set(holesToPop)]
+                updatedHoles = Array(9).fill(null)
+                holesToPop.forEach(item => {
+                    return updatedHoles[item] = true
+                })
+                setHolesOccupied(updatedHoles)
+    
+    
+    
+                setRandomAnimalAudio(prevRandomAudio => {
+                    const randomAnimalAudio = animalAudioArray[Math.floor(Math.random() * animalAudioArray.length)].word;
+                    const audio = new Audio(randomAnimalAudio);
+                    audio.play();
+                    return randomAnimalAudio;
+                });
+                
+            }, gameInterval.current);
+    
+            return () => {
+                clearInterval(intervalId);
+            };
+        }
+        
     }, [gameInterval.current, cdActive]);
 
 
@@ -130,6 +133,7 @@ function App() {
     let countdownInterval;
     const countdownFunction = () => {
         setCdActive(true)
+        // need to make intervalId start only when this clicked...and end when other buttons clicked
     }
 
     useEffect(() => {
@@ -169,11 +173,15 @@ function App() {
 
     const resetFunction = () => {
         setCdActive(false)
+        setHolesOccupied(Array(9).fill(null))
+        setPoints(0)
     }
 
     const menuFunction = () => {
         setMenuActive(true)
         setCdActive(false)
+        setHolesOccupied(Array(9).fill(null))
+        setPoints(0)
     }
 
   return (<>
