@@ -24,9 +24,29 @@ export default function GameArea() {
         // console.log(holesOccupied)
 
         if(wordCall === clickedImg) {
-            setPoints(points => points+1)
+            switch(gameDifficulty) {
+                case "Easy":
+                    setPoints(points => points+1);
+                    break;
+                case "Medium":
+                    setPoints(points => points+5);
+                    break;
+                    case "Hard":
+                    setPoints(points => points+10);
+                    break;
+            }
         } else {
-            setPoints(points => points-1)
+            switch(gameDifficulty) {
+                case "Easy":
+                    setPoints(points => points-1);
+                    break;
+                case "Medium":
+                    setPoints(points => points-5);
+                    break;
+                    case "Hard":
+                    setPoints(points => points-10);
+                    break;
+            }
         }
 
         const holeToCancel = e.target.parentElement.classList[1]
