@@ -23,7 +23,7 @@ export default function ScoreForm() {
         const xhr = new XMLHttpRequest();
 
         xhr.open('POST', form.attributes[1].value);
-        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+        // xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
 
 
         xhr.addEventListener('readystatechange', function () {
