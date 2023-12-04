@@ -1,15 +1,37 @@
 import { useContext, useState } from "react"
 import GameContext from "../ContextFile"
 import SettingsCard from "./SettingsCard"
+import Scoreboard from "./Scoreboard"
 
 export default function MenuCard() {
 
     const [holesOccupied, setHolesOccupied, holes, animalArray, randomAnimalAudio, points, setPoints, menuActive, setMenuActive, playerName, setPlayerName, gameTopic, setGameTopic, gameDifficulty, setGameDifficulty] = useContext(GameContext)
 
     const [settingsCardActive, setSettingsCardActive] = useState(false)
+    const [scoreboardActive, setScoreboardActive] = useState(false)
 
     const settingsCardFunction = () => {
         setSettingsCardActive(true)
+    }
+
+    let scoreResults;
+    const scoreboardFunction = () => {
+        setScoreboardActive(true)
+
+        const xhr = new XMLHttpRequest();
+
+        xhr.open('GET', 'http://localhost:8000/get_scores.php');
+        // xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+
+        xhr.addEventListener('readystatechange', function () {
+            if (this.readyState === this.DONE) {
+                scoreResults = JSON.parse(this.responseText);
+                console.log(scoreResults)
+            }
+        });
+
+        xhr.send();
+
     }
 
     const exitMenuFunction = () => {
@@ -26,7 +48,7 @@ export default function MenuCard() {
                             <ul className="mt-5 flex flex-col items-center">
                                 <li className="py-2">Instructions</li>
                                 <li className="py-2" onClick={settingsCardFunction}>Settings</li>
-                                <li className="py-2">Scoreboard</li>
+                                <li className="py-2" onClick={scoreboardFunction}>Scoreboard</li>
                                 <li className="py-2">Leave Feedback</li>
                                 <li className="py-2" onClick={exitMenuFunction}>Exit Menu</li>
                             </ul>
@@ -34,6 +56,8 @@ export default function MenuCard() {
                     </div>
 
                     {settingsCardActive && <SettingsCard cardActive={settingsCardActive} setCardActive={setSettingsCardActive} />}
+
+                    {scoreboardActive && <Scoreboard results={scoreResults} />}
 
             </>
         
