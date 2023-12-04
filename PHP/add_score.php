@@ -1,24 +1,31 @@
-<?php 
+<?php
+header("Access-Control-Allow-Origin: http://localhost:3000");
 
-    include 'database.php';
+include 'database.php';
 
-    if(isset($_POST['score_submit'])) {
-        $player = mysqli_real_escape_string($con, $_POST['user']);
-        $topic = mysqli_real_escape_string($con, $_POST['topic']);
-        $difficulty = mysqli_real_escape_string($con, $_POST['difficulty']);
-        $score = isset($_POST['score']) ? intval($_POST['score']) : null;
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    // Check if the required fields are present
+    if(isset($_POST['difficulty'], $_POST['topic'], $_POST['score'], $_POST['user'])) {
+        $difficulty = $_POST['difficulty'];
+        $topic = $_POST['topic'];
+        $score = intval($_POST['score']);
+        $user = $_POST['user'];
 
-        if(!isset($user) || $user == "") {
-            $error = "Please type a valid username.";
-            header("Location: App.js?error=" . urlencode($error));
-        } else {
-            $query = "INSERT INTO playerscore (user, topic, difficulty, score)
-                                VALUES ('$player', '$topic', '$difficulty', '$score')";
-            if(!mysqli_query($con, $query)) {
-                die(mysqli_error($con));
-            } else {
-                header("Location: App.js");
-                exit();
-            }
-        }
+        // Output for testing
+        echo "Your topic is " . $topic . " and your level was " . $difficulty . ". Your final score is " . $score . ". Well done, " . $user;
+
+        // Insert data into the database (use prepared statements to prevent SQL injection)
+        $stmt = $con->prepare("INSERT INTO playerscore (user, topic, difficulty, score) VALUES (?, ?, ?, ?)");
+        $stmt->bind_param("sssi", $user, $topic, $difficulty, $score);
+        $stmt->execute();
+
+        // Close the statement
+        $stmt->close();
+
+    } else {
+        echo "One or more required fields are missing.";
     }
+} else {
+    echo "Invalid request method.";
+}
+?>

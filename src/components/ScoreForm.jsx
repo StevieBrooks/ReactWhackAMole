@@ -40,7 +40,7 @@ export default function ScoreForm() {
         
             <h2>Great Work!</h2>    
             <p>Record your high score here:</p>
-            <form className="flex flex-col" action="http://localhost:8000/server.php" method="POST" onSubmit={(e) => submitForm(e)}>
+            <form className="flex flex-col" action="http://localhost:8000/add_score.php" method="POST" onSubmit={(e) => submitForm(e)}>
 
                 {/* hide these readonly inputs and display their values in paragraphs for nicer UX */}
                 <input className="hidden" type="text" name="difficulty" value={gameDifficulty} readOnly />
