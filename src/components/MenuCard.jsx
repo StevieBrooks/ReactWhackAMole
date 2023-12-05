@@ -1,4 +1,4 @@
-import { useContext, useState } from "react"
+import { useContext, useState, useRef } from "react"
 import GameContext from "../ContextFile"
 import SettingsCard from "./SettingsCard"
 import Scoreboard from "./Scoreboard"
@@ -10,27 +10,31 @@ export default function MenuCard() {
     const [settingsCardActive, setSettingsCardActive] = useState(false)
     const [scoreboardActive, setScoreboardActive] = useState(false)
 
+    let scoreResults = useRef([])
+
     const settingsCardFunction = () => {
         setSettingsCardActive(true)
     }
 
-    let scoreResults;
     const scoreboardFunction = () => {
-        setScoreboardActive(true)
 
         const xhr = new XMLHttpRequest();
+    
+            xhr.open('GET', 'http://localhost:8000/get_scores.php');
+            // xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+    
+            xhr.addEventListener('readystatechange', function () {
+                if (this.readyState === this.DONE) {
+                    scoreResults.current = JSON.parse(this.responseText)
+                    console.log(scoreResults)
+                }
+            });
+    
+            xhr.send();
 
-        xhr.open('GET', 'http://localhost:8000/get_scores.php');
-        // xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-
-        xhr.addEventListener('readystatechange', function () {
-            if (this.readyState === this.DONE) {
-                scoreResults = JSON.parse(this.responseText);
-                console.log(scoreResults)
-            }
-        });
-
-        xhr.send();
+            setTimeout(function() {
+                setScoreboardActive(true)
+            }, 0o100)
 
     }
 
@@ -40,7 +44,7 @@ export default function MenuCard() {
 
     return ( <>
     
-                <div className={`menu-container ${settingsCardActive && "hidden"}`}>
+                <div className={`menu-container ${(settingsCardActive || scoreboardActive) && "hidden"}`}>
                         <div className="menu flex flex-col items-center">
                             <header>
                                 <h2 className="font-bold">Game Menu</h2>
@@ -57,7 +61,7 @@ export default function MenuCard() {
 
                     {settingsCardActive && <SettingsCard cardActive={settingsCardActive} setCardActive={setSettingsCardActive} />}
 
-                    {scoreboardActive && <Scoreboard results={scoreResults} />}
+                    {scoreboardActive && <Scoreboard results={scoreResults.current}  setBoardActive={setScoreboardActive} />}
 
             </>
         
