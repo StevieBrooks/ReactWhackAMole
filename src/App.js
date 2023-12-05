@@ -75,8 +75,7 @@ function App() {
 
 // GAME BEGINS ONLY WHEN COUNTDOWN IS ACTIVE
     useEffect(() => {
-        // const max = 5
-        // const min = 2
+
         if(cdActive) {
             const intervalId = setInterval(() => {
 
@@ -179,7 +178,7 @@ function App() {
             clearInterval(countdownInterval)
             setGameTime(function() {
                 if(gameDifficulty === "Hard") {
-                    return "0:10"
+                    return "1:00"
                 } else if(gameDifficulty === "Medium") {
                     return "2:00"
                 } else {

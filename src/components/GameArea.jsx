@@ -5,7 +5,7 @@ import GameContext from "../ContextFile"
 
 export default function GameArea() {
 
-    const [holesOccupied, setHolesOccupied, holes, animalArray, randomAnimalAudio, points, setPoints, menuActive, setMenuActive, playerName, setPlayerName, gameTopic, setGameTopic, gameDifficulty, setGameDifficulty] = useContext(GameContext)
+    const [holesOccupied, setHolesOccupied, holes, animalArray, randomAnimalAudio, points, setPoints, menuActive, setMenuActive, playerName, setPlayerName, gameTopic, setGameTopic, gameDifficulty, setGameDifficulty, gameTime, setGameTime, cdActive, setCdActive, scoreFormActive, setScoreFormActive] = useContext(GameContext)
     
     
     const imgClickHandler = (e) => {
@@ -20,8 +20,9 @@ export default function GameArea() {
         const imgWordToMatch = matchImgWord[1].split("/")
         const clickedImg = imgWordToMatch[4]
 
-        // console.log(wordCall)
-        // console.log(holesOccupied)
+        console.log(wordCall)
+        console.log(clickedImg)
+        console.log(holesOccupied)
 
         if(wordCall === clickedImg) {
             switch(gameDifficulty) {
@@ -63,3 +64,9 @@ export default function GameArea() {
         </div>
     )
 }
+
+/* ALGORITHM TO ENSURE GAME IS FAIR
+    - need to know which holes are occupied immediately after each call (wordCall in click hndler)
+    - at least one hole must be populated with correct answser
+    - need the variables from click handler
+*/
