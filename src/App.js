@@ -80,17 +80,21 @@ function App() {
         if(cdActive) {
             const intervalId = setInterval(() => {
 
-                const numOfHoles = Math.ceil(Math.random() * 5)
-                // console.log(numOfHoles)
+                const numOfHoles = Math.floor(Math.random() * 3) + 2
                 let holesToPop = []
                 for(let i = 0; i < numOfHoles; i++) {
                     const holePop = Math.floor(Math.random() * holes.length)
-                    holesToPop.push(holePop)
+                    if(!holesToPop.includes(holePop)) {
+                        holesToPop.push(holePop)
+                    }
                 }
-    
-                // this new holeToPop array isn't same amt as numOfHoles because dupes have been removed. Need to add in new values and also make sure numOfHoles is between 2 and 5...then work on algorithm.
-                
-                holesToPop = [...new Set(holesToPop)]
+                while(holesToPop.length < numOfHoles) {
+                    const holePop = Math.floor(Math.random() * holes.length)
+                    if(!holesToPop.includes(holePop)) {
+                        holesToPop.push(holePop)
+                    }
+                }
+
                 updatedHoles = Array(9).fill(null)
                 holesToPop.forEach(item => {
                     return updatedHoles[item] = true
