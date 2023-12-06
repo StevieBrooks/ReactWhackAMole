@@ -79,33 +79,37 @@ function App() {
         if(cdActive) {
             const intervalId = setInterval(() => {
 
-                const numOfHoles = Math.floor(Math.random() * 3) + 2
-                let holesToPop = []
-                for(let i = 0; i < numOfHoles; i++) {
-                    const holePop = Math.floor(Math.random() * holes.length)
-                    if(!holesToPop.includes(holePop)) {
-                        holesToPop.push(holePop)
-                    }
-                }
-                while(holesToPop.length < numOfHoles) {
-                    const holePop = Math.floor(Math.random() * holes.length)
-                    if(!holesToPop.includes(holePop)) {
-                        holesToPop.push(holePop)
-                    }
-                }
-
-                updatedHoles = Array(9).fill(null)
-                holesToPop.forEach(item => {
-                    return updatedHoles[item] = true
-                })
-                setHolesOccupied(updatedHoles)
-    
                 setRandomAnimalAudio(prevRandomAudio => {
+
                     const randomAnimalAudio = animalAudioArray[Math.floor(Math.random() * animalAudioArray.length)].word;
                     const audio = new Audio(randomAnimalAudio);
                     audio.play();
+
+                    setTimeout(function() {
+                        const numOfHoles = Math.floor(Math.random() * 3) + 2
+                        let holesToPop = []
+                        for(let i = 0; i < numOfHoles; i++) {
+                            const holePop = Math.floor(Math.random() * holes.length)
+                            if(!holesToPop.includes(holePop)) {
+                                holesToPop.push(holePop)
+                            }
+                        }
+                        while(holesToPop.length < numOfHoles) {
+                            const holePop = Math.floor(Math.random() * holes.length)
+                            if(!holesToPop.includes(holePop)) {
+                                holesToPop.push(holePop)
+                            }
+                        }
+
+                        updatedHoles = Array(9).fill(null)
+                        holesToPop.forEach(item => {
+                            return updatedHoles[item] = true
+                        })
+                        setHolesOccupied(updatedHoles)
+                    }, 200)
+                    
                     return randomAnimalAudio;
-                });
+                }); 
                 
             }, gameInterval.current);
     
