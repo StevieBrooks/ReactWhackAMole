@@ -1,13 +1,15 @@
 import Hole from "./Hole"
 import Mole from "../images/mole.png"
-import { useContext } from "react";
+import { useRef, useContext, useEffect, useState } from "react";
 import GameContext from "../ContextFile"
 
 export default function GameArea() {
 
     const [holesOccupied, setHolesOccupied, holes, animalArray, randomAnimalAudio, points, setPoints, menuActive, setMenuActive, playerName, setPlayerName, gameTopic, setGameTopic, gameDifficulty, setGameDifficulty, gameTime, setGameTime, cdActive, setCdActive, scoreFormActive, setScoreFormActive] = useContext(GameContext)
     
-    
+    let occupiedHoles = useRef([])
+    const [randomVal, setRandomVal] = useState(0)
+
     const imgClickHandler = (e) => {
 
         const regex = /\/(.*?)\./
@@ -20,9 +22,9 @@ export default function GameArea() {
         const imgWordToMatch = matchImgWord[1].split("/")
         const clickedImg = imgWordToMatch[4]
 
-        console.log(wordCall)
-        console.log(clickedImg)
-        console.log(holesOccupied)
+        // console.log(wordCall)
+        // console.log(clickedImg)
+        // console.log(holesOccupied)
 
         if(wordCall === clickedImg) {
             switch(gameDifficulty) {
@@ -56,17 +58,42 @@ export default function GameArea() {
         setHolesOccupied(updatedHoles)
     }
 
+    let randomValue;
+    useEffect(() => {
+        occupiedHoles.current = []
+        holesOccupied.forEach((item, index) => {
+            if(item === true) {
+                occupiedHoles.current.push(index)
+            }
+        })
+        console.log(occupiedHoles.current)
+        const randomIndex = Math.floor(Math.random() * occupiedHoles.current.length)
+        randomValue = occupiedHoles.current[randomIndex]
+        setRandomVal(randomValue)
+       
+    }, [holesOccupied])
+
     return (
         <div className="game-area border grid grid-cols-3 grid-flow-row py-5">
             {holes.map((hole, index) => (
-                <Hole key={index} id={index} occupied={holesOccupied[index]} clickHandler={imgClickHandler} />
+                <Hole key={index} id={index} occupied={holesOccupied[index]} randomVal={randomVal} clickHandler={imgClickHandler} />
             ))}
         </div>
     )
 }
 
-/* ALGORITHM TO ENSURE GAME IS FAIR
-    - need to know which holes are occupied immediately after each call (wordCall in click hndler)
-    - at least one hole must be populated with correct answser
-    - need the variables from click handler
+// SEND PROPS TO HOLE TO BE USED IN PARENTHESIS FOR IMG SRC ALONG WITH 'OCCUPIED'
+// amt holes occupied, hole to contain correct img
+// other holes can be random images
+
+/* NEED SOMETHING LIKE THIS TO ENSURE RANDOM VALUE DIFFERENT EVERYTIME ...
+
+      let newRandomValue;
+  do {
+    const randomIndex = Math.floor(Math.random() * occupiedHoles.current.length);
+    newRandomValue = occupiedHoles.current[randomIndex];
+  } while (newRandomValue === randomValue);
+
+  setRandomVal(newRandomValue);
+  
 */

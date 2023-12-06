@@ -58,8 +58,8 @@ function App() {
     const [points, setPoints] = useState(0)
     const [menuActive, setMenuActive] = useState(false)
     const [playerName, setPlayerName] = useState("")
-    const [gameTopic, setGameTopic] = useState("")
-    const [gameDifficulty, setGameDifficulty] = useState("")
+    const [gameTopic, setGameTopic] = useState("Animals")
+    const [gameDifficulty, setGameDifficulty] = useState("Easy")
     const [gameTime, setGameTime] = useState()
     const [cdActive, setCdActive] = useState(false)
     const [scoreFormActive, setScoreFormActive] = useState(false)
@@ -106,8 +106,8 @@ function App() {
                             return updatedHoles[item] = true
                         })
                         setHolesOccupied(updatedHoles)
-                    }, 200)
-                    
+                    }, 500)
+                    // could make larger, more obvkous delay and increase intervals and game time - better user experience!
                     return randomAnimalAudio;
                 }); 
                 
@@ -246,11 +246,6 @@ function App() {
 
 export default App;
 
-/* MONDAY TASKLIST
-    - develop algorithm to handle amount of correct images appear per game
-*/
-
-
 /* ---- IDEAS ----
 
 - multiplayer / single player - scores can be added to high-score db regardless of setting
@@ -259,8 +254,4 @@ export default App;
 - scoreboard choice in menu
 - give holes numbers 1-9 - kids will love shouting that out to their mates who are playing in class
 
-*/
-
-/* BUGS
-    - some images will remain stuck in same holes for ages
 */
