@@ -3,6 +3,7 @@ import GameContext from "../ContextFile"
 import SettingsCard from "./SettingsCard"
 import Scoreboard from "./Scoreboard"
 import FeedbackCard from "./FeedbackCard"
+import InstructionsCard from "./InstructionsCard"
 
 export default function MenuCard() {
 
@@ -11,9 +12,14 @@ export default function MenuCard() {
     const [settingsCardActive, setSettingsCardActive] = useState(false)
     const [scoreboardActive, setScoreboardActive] = useState(false)
     const [feedbackCardActive, setFeedbackCardActive] = useState(false)
+    const [instructionsCardActive, setInstructionsCardActive] = useState(false)
 
     let scoreResults = useRef([])
     let feedbackResults = useRef([])
+
+    const instructionsCardFunction = () => {
+        setInstructionsCardActive(true)
+    }
 
     const settingsCardFunction = () => {
         setSettingsCardActive(true)
@@ -69,13 +75,13 @@ export default function MenuCard() {
 
     return ( <>
     
-                <div className={`menu-container ${(settingsCardActive || scoreboardActive || feedbackCardActive) && "hidden"}`}>
+                <div className={`menu-container ${(settingsCardActive || scoreboardActive || feedbackCardActive || instructionsCardActive) && "hidden"}`}>
                         <div className="menu flex flex-col items-center">
                             <header>
                                 <h2 className="font-bold">Game Menu</h2>
                             </header>
                             <ul className="mt-5 flex flex-col items-center">
-                                <li className="py-2">Instructions</li>
+                                <li className="py-2" onClick={instructionsCardFunction}>Instructions</li>
                                 <li className="py-2" onClick={settingsCardFunction}>Settings</li>
                                 <li className="py-2" onClick={scoreboardFunction}>Scoreboard</li>
                                 <li className="py-2" onClick={feedbackCardFunction}>Leave Feedback</li>
@@ -83,6 +89,8 @@ export default function MenuCard() {
                             </ul>
                         </div>
                     </div>
+
+                    {instructionsCardActive && <InstructionsCard deactivate={setInstructionsCardActive} />}
 
                     {settingsCardActive && <SettingsCard cardActive={settingsCardActive} setCardActive={setSettingsCardActive} />}
 
