@@ -21,7 +21,7 @@ export default function Hole( { id, occupied, randomVal, clickHandler } ) {
         const audioWordToMatch = match[1].split("/")
         const wordCall = audioWordToMatch[2]
     
-        console.log(randomVal) 
+        // console.log(randomVal) 
     
         if(randomVal === id) {
             const returnVal = animalArray.filter(item => {

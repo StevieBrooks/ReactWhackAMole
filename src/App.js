@@ -86,7 +86,7 @@ function App() {
                     audio.play();
 
                     setTimeout(function() {
-                        const numOfHoles = Math.floor(Math.random() * 3) + 2
+                        const numOfHoles = Math.floor(Math.random() * 4) + 2
                         let holesToPop = []
                         for(let i = 0; i < numOfHoles; i++) {
                             const holePop = Math.floor(Math.random() * holes.length)

@@ -9,6 +9,7 @@ export default function GameArea() {
     
     let occupiedHoles = useRef([])
     const [randomVal, setRandomVal] = useState(0)
+    const [imageClicked, setImageClicked] = useState(false)
 
     const imgClickHandler = (e) => {
 
@@ -56,6 +57,7 @@ export default function GameArea() {
         const updatedHoles = [...holesOccupied]
         updatedHoles[holeToCancel] = null
         setHolesOccupied(updatedHoles)
+        setImageClicked(true)
     }
 
     let randomValue;
@@ -67,9 +69,13 @@ export default function GameArea() {
             }
         })
         console.log(occupiedHoles.current)
-        const randomIndex = Math.floor(Math.random() * occupiedHoles.current.length)
-        randomValue = occupiedHoles.current[randomIndex]
-        setRandomVal(randomValue)
+        if(!imageClicked) {
+            const randomIndex = Math.floor(Math.random() * occupiedHoles.current.length)
+            randomValue = occupiedHoles.current[randomIndex]
+            setRandomVal(randomValue)
+        } else {
+            setImageClicked(false)
+        }
        
     }, [holesOccupied])
 
