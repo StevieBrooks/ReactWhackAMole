@@ -209,7 +209,7 @@ function App() {
 
   return (<>
     
-        <div className="game-container border rounded w-11/12 h-96 mx-auto relative top-8 bg-[#64cc16]">
+        <div className="game-container border rounded w-11/12 h-fit max-w-xl mx-auto relative top-20 bg-[#64c516]">
 
             {menuActive ? 
             <>

@@ -76,7 +76,7 @@ export default function GameArea() {
     }, [holesOccupied])
 
     return (
-        <div className="game-area border grid grid-cols-3 grid-flow-row py-5">
+        <div className="game-area w-fit mx-auto grid grid-cols-3 grid-flow-row justify-items-center py-5">
             {holes.map((hole, index) => (
                 <Hole key={index} id={index} occupied={holesOccupied[index]} randomVal={randomVal} clickHandler={imgClickHandler} />
             ))}
