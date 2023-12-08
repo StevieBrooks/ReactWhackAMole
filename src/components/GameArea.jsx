@@ -23,10 +23,6 @@ export default function GameArea() {
         const imgWordToMatch = matchImgWord[1].split("/")
         const clickedImg = imgWordToMatch[4]
 
-        // console.log(wordCall)
-        // console.log(clickedImg)
-        // console.log(holesOccupied)
-
         if(wordCall === clickedImg) {
             switch(gameDifficulty) {
                 case "Easy":
@@ -88,9 +84,6 @@ export default function GameArea() {
     )
 }
 
-// SEND PROPS TO HOLE TO BE USED IN PARENTHESIS FOR IMG SRC ALONG WITH 'OCCUPIED'
-// amt holes occupied, hole to contain correct img
-// other holes can be random images
 
 /* NEED SOMETHING LIKE THIS TO ENSURE RANDOM VALUE DIFFERENT EVERYTIME ...
 

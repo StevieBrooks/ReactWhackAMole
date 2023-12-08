@@ -46,5 +46,4 @@ export default function Hole( { id, occupied, randomVal, clickHandler } ) {
 
 
 
-//use this - https://bobbyhadz.com/blog/javascript-count-elements-in-array-with-condition
 
