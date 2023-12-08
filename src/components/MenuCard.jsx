@@ -2,6 +2,7 @@ import { useContext, useState, useRef } from "react"
 import GameContext from "../ContextFile"
 import SettingsCard from "./SettingsCard"
 import Scoreboard from "./Scoreboard"
+import FeedbackCard from "./FeedbackCard"
 
 export default function MenuCard() {
 
@@ -9,8 +10,10 @@ export default function MenuCard() {
 
     const [settingsCardActive, setSettingsCardActive] = useState(false)
     const [scoreboardActive, setScoreboardActive] = useState(false)
+    const [feedbackCardActive, setFeedbackCardActive] = useState(false)
 
     let scoreResults = useRef([])
+    let feedbackResults = useRef([])
 
     const settingsCardFunction = () => {
         setSettingsCardActive(true)
@@ -20,22 +23,44 @@ export default function MenuCard() {
 
         const xhr = new XMLHttpRequest();
     
-            xhr.open('GET', 'http://localhost:8000/get_scores.php');
-            // xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-    
-            xhr.addEventListener('readystatechange', function () {
-                if (this.readyState === this.DONE) {
-                    scoreResults.current = JSON.parse(this.responseText)
-                    console.log(scoreResults)
-                }
-            });
-    
-            xhr.send();
+        xhr.open('GET', 'http://localhost:8000/get_scores.php');
+        // xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
 
-            setTimeout(function() {
-                setScoreboardActive(true)
-            }, 0o100)
+        xhr.addEventListener('readystatechange', function () {
+            if (this.readyState === this.DONE) {
+                scoreResults.current = JSON.parse(this.responseText)
+                console.log(scoreResults)
+            }
+        });
 
+        xhr.send();
+
+        setTimeout(function() {
+            setScoreboardActive(true)
+        }, 0o100)
+
+    }
+
+    const feedbackCardFunction = () => {
+
+        const xhr = new XMLHttpRequest();
+    
+        xhr.open('GET', 'http://localhost:8000/get_feedback.php');
+        // xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+
+        xhr.addEventListener('readystatechange', function () {
+            if (this.readyState === this.DONE) {
+                feedbackResults.current = JSON.parse(this.responseText)
+                console.log(feedbackResults)
+            }
+        });
+
+        xhr.send();
+
+        setTimeout(function() {
+            setFeedbackCardActive(true)
+        }, 0o100)
+        
     }
 
     const exitMenuFunction = () => {
@@ -44,7 +69,7 @@ export default function MenuCard() {
 
     return ( <>
     
-                <div className={`menu-container ${(settingsCardActive || scoreboardActive) && "hidden"}`}>
+                <div className={`menu-container ${(settingsCardActive || scoreboardActive || feedbackCardActive) && "hidden"}`}>
                         <div className="menu flex flex-col items-center">
                             <header>
                                 <h2 className="font-bold">Game Menu</h2>
@@ -53,7 +78,7 @@ export default function MenuCard() {
                                 <li className="py-2">Instructions</li>
                                 <li className="py-2" onClick={settingsCardFunction}>Settings</li>
                                 <li className="py-2" onClick={scoreboardFunction}>Scoreboard</li>
-                                <li className="py-2">Leave Feedback</li>
+                                <li className="py-2" onClick={feedbackCardFunction}>Leave Feedback</li>
                                 <li className="py-2" onClick={exitMenuFunction}>Exit Menu</li>
                             </ul>
                         </div>
@@ -62,6 +87,8 @@ export default function MenuCard() {
                     {settingsCardActive && <SettingsCard cardActive={settingsCardActive} setCardActive={setSettingsCardActive} />}
 
                     {scoreboardActive && <Scoreboard results={scoreResults.current}  setBoardActive={setScoreboardActive} />}
+
+                    {feedbackCardActive && <FeedbackCard fbResults={feedbackResults.current} deactivate={setFeedbackCardActive} />}
 
             </>
         
