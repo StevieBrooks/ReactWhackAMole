@@ -1,5 +1,5 @@
 import Hole from "./Hole"
-import Mole from "../images/mole.png"
+// import Mole from "../images/mole.png"
 import { useRef, useContext, useEffect, useState } from "react";
 import GameContext from "../ContextFile"
 
