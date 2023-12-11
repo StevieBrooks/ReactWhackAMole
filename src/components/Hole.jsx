@@ -3,7 +3,7 @@ import GameContext from "../ContextFile"
 
 export default function Hole( { id, occupied, randomVal, clickHandler } ) {
 
-    const [holesOccupied, setHolesOccupied, holes, animalArray, randomAnimalAudio, points, setPoints, menuActive, setMenuActive, playerName, setPlayerName, gameTopic, setGameTopic, gameDifficulty, setGameDifficulty, gameTime, setGameTime, cdActive, setCdActive, scoreFormActive, setScoreFormActive] = useContext(GameContext)
+    const [holesOccupied, setHolesOccupied, holes, animalArray, colorArray, randomAudio, points, setPoints, menuActive, setMenuActive, playerName, setPlayerName, gameTopic, setGameTopic, gameDifficulty, setGameDifficulty, gameTime, setGameTime, cdActive, setCdActive, scoreFormActive, setScoreFormActive] = useContext(GameContext)
 
     const [holeImage, setHoleImage] = useState()
 
@@ -17,23 +17,39 @@ export default function Hole( { id, occupied, randomVal, clickHandler } ) {
     const generateImage = () => {
     
         const regex = /\/(.*?)\./
-        const match = randomAnimalAudio.match(regex)
+        const match = randomAudio.match(regex)
         const audioWordToMatch = match[1].split("/")
         const wordCall = audioWordToMatch[2]
     
         // console.log(randomVal) 
-    
-        if(randomVal === id) {
-            const returnVal = animalArray.filter(item => {
-                if(item.name === wordCall) {
-                    return item.icon;
+
+        switch(gameTopic) {
+            case "Animals":
+                if(randomVal === id) {
+                    const returnVal = animalArray.filter(item => {
+                        if(item.name === wordCall) {
+                            return item.icon;
+                        }
+                    })
+                    return returnVal[0].icon
+                } else {
+                    return animalArray[Math.floor(Math.random() * animalArray.length)].icon
+                };
+                break;
+            case "Colors":
+                if(randomVal === id) {
+                    const returnVal = colorArray.filter(item => {
+                        if(item.name === wordCall) {
+                            return item.icon;
+                        }
+                    })
+                    return returnVal[0].icon
+                } else {
+                    return colorArray[Math.floor(Math.random() * colorArray.length)].icon
                 }
-            })
-            return returnVal[0].icon
-        } else {
-    
-            return animalArray[Math.floor(Math.random() * animalArray.length)].icon
         }
+    
+        
     
     }
     

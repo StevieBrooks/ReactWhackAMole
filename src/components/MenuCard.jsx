@@ -7,7 +7,7 @@ import InstructionsCard from "./InstructionsCard"
 
 export default function MenuCard() {
 
-    const [holesOccupied, setHolesOccupied, holes, animalArray, randomAnimalAudio, points, setPoints, menuActive, setMenuActive, playerName, setPlayerName, gameTopic, setGameTopic, gameDifficulty, setGameDifficulty] = useContext(GameContext)
+    const [holesOccupied, setHolesOccupied, holes, animalArray, colorArray, randomAudio, points, setPoints, menuActive, setMenuActive, playerName, setPlayerName, gameTopic, setGameTopic, gameDifficulty, setGameDifficulty, gameTime, setGameTime, cdActive, setCdActive, scoreFormActive, setScoreFormActive] = useContext(GameContext)
 
     const [settingsCardActive, setSettingsCardActive] = useState(false)
     const [scoreboardActive, setScoreboardActive] = useState(false)

@@ -5,7 +5,7 @@ import GameContext from "../ContextFile"
 
 export default function GameArea() {
 
-    const [holesOccupied, setHolesOccupied, holes, animalArray, randomAnimalAudio, points, setPoints, menuActive, setMenuActive, playerName, setPlayerName, gameTopic, setGameTopic, gameDifficulty, setGameDifficulty, gameTime, setGameTime, cdActive, setCdActive, scoreFormActive, setScoreFormActive] = useContext(GameContext)
+    const [holesOccupied, setHolesOccupied, holes, animalArray, colorArray, randomAudio, points, setPoints, menuActive, setMenuActive, playerName, setPlayerName, gameTopic, setGameTopic, gameDifficulty, setGameDifficulty, gameTime, setGameTime, cdActive, setCdActive, scoreFormActive, setScoreFormActive] = useContext(GameContext)
     
     let occupiedHoles = useRef([])
     const [randomVal, setRandomVal] = useState(0)
@@ -14,7 +14,7 @@ export default function GameArea() {
     const imgClickHandler = (e) => {
 
         const regex = /\/(.*?)\./
-        const match = randomAnimalAudio.match(regex)
+        const match = randomAudio.match(regex);
         const audioWordToMatch = match[1].split("/")
         const wordCall = audioWordToMatch[2]
 
@@ -22,6 +22,10 @@ export default function GameArea() {
         const matchImgWord = imgWord.match(regex)
         const imgWordToMatch = matchImgWord[1].split("/")
         const clickedImg = imgWordToMatch[4]
+
+        console.log(wordCall)
+        console.log(clickedImg)
+        console.log(gameDifficulty)
 
         if(wordCall === clickedImg) {
             switch(gameDifficulty) {
@@ -64,7 +68,7 @@ export default function GameArea() {
                 occupiedHoles.current.push(index)
             }
         })
-        console.log(occupiedHoles.current)
+        // console.log(occupiedHoles.current)
         if(!imageClicked) {
             const randomIndex = Math.floor(Math.random() * occupiedHoles.current.length)
             randomValue = occupiedHoles.current[randomIndex]

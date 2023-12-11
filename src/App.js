@@ -88,6 +88,7 @@ const animalArray = [
     {icon: penguin, name: "penguin"},
     {icon: turtle, name: "turtle"},
     {icon: dolphin, name: "dolphin"},
+    // replace doplphin, giraffe and horse
 ]
 
 const animalAudioArray = [
@@ -118,6 +119,7 @@ const colorArray = [
     {icon: black, name: "black"},
     {icon: white, name: "white"},
     {icon: grey, name: "grey"},
+    // problem with grey
 ]
 
 const colorAudioArray = [
@@ -139,7 +141,7 @@ function App() {
 
 // STATE 
     const [holesOccupied, setHolesOccupied] = useState(Array(9).fill(null))
-    const [randomAnimalAudio, setRandomAnimalAudio] = useState()
+    const [randomAudio, setRandomAudio] = useState()
     const [points, setPoints] = useState(0)
     const [menuActive, setMenuActive] = useState(false)
     const [playerName, setPlayerName] = useState("")
@@ -162,12 +164,22 @@ function App() {
     useEffect(() => {
 
         if(cdActive) {
+            let randomAudio;
             const intervalId = setInterval(() => {
 
-                setRandomAnimalAudio(prevRandomAudio => {
+                setRandomAudio(prevRandomAudio => {
 
-                    const randomAnimalAudio = animalAudioArray[Math.floor(Math.random() * animalAudioArray.length)].word;
-                    const audio = new Audio(randomAnimalAudio);
+                    switch(gameTopic) {
+                        case "Animals":
+                            randomAudio = animalAudioArray[Math.floor(Math.random() * animalAudioArray.length)].word;
+                            break;
+                        case "Colors":
+                            randomAudio = colorAudioArray[Math.floor(Math.random() * colorAudioArray.length)].word;
+                            break;
+                    }
+
+                    
+                    const audio = new Audio(randomAudio);
                     audio.play();
 
                     setTimeout(function() {
@@ -191,9 +203,9 @@ function App() {
                             return updatedHoles[item] = true
                         })
                         setHolesOccupied(updatedHoles)
-                    }, 500)
-                    // could make larger, more obvkous delay and increase intervals and game time - better user experience!
-                    return randomAnimalAudio;
+                    }, 1000)
+                    // IMPORTANT: make larger, more obvkous delay and increase intervals and game time - better user experience!
+                    return randomAudio;
                 }); 
                 
             }, gameInterval.current);
@@ -298,13 +310,13 @@ function App() {
 
             {menuActive ? 
             <>
-                <GameContext.Provider value={[holesOccupied, setHolesOccupied, holes, animalArray, randomAnimalAudio, points, setPoints, menuActive, setMenuActive, playerName, setPlayerName, gameTopic, setGameTopic, gameDifficulty, setGameDifficulty, gameTime, setGameTime, cdActive, setCdActive, scoreFormActive, setScoreFormActive]}>
+                <GameContext.Provider value={[holesOccupied, setHolesOccupied, holes, animalArray, colorArray, randomAudio, points, setPoints, menuActive, setMenuActive, playerName, setPlayerName, gameTopic, setGameTopic, gameDifficulty, setGameDifficulty, gameTime, setGameTime, cdActive, setCdActive, scoreFormActive, setScoreFormActive]}>
                     <MenuCard />
                 </GameContext.Provider>
             </>
             : scoreFormActive ? 
             <>
-                <GameContext.Provider value={[holesOccupied, setHolesOccupied, holes, animalArray, randomAnimalAudio, points, setPoints, menuActive, setMenuActive, playerName, setPlayerName, gameTopic, setGameTopic, gameDifficulty, setGameDifficulty, gameTime, setGameTime, cdActive, setCdActive, scoreFormActive, setScoreFormActive]}>
+                <GameContext.Provider value={[holesOccupied, setHolesOccupied, holes, animalArray, colorArray, randomAudio, points, setPoints, menuActive, setMenuActive, playerName, setPlayerName, gameTopic, setGameTopic, gameDifficulty, setGameDifficulty, gameTime, setGameTime, cdActive, setCdActive, scoreFormActive, setScoreFormActive]}>
                     <ScoreForm />
                 </GameContext.Provider>
             </>
@@ -312,7 +324,7 @@ function App() {
             <>
                 <Header h1Title="Whack-a-Mole" />
 
-                <GameContext.Provider value={[holesOccupied, setHolesOccupied, holes, animalArray, randomAnimalAudio, points, setPoints, menuActive, setMenuActive, playerName, setPlayerName, gameTopic, setGameTopic, gameDifficulty, setGameDifficulty, gameTime, setGameTime, cdActive, setCdActive, scoreFormActive, setScoreFormActive]}>
+                <GameContext.Provider value={[holesOccupied, setHolesOccupied, holes, animalArray, colorArray, randomAudio, points, setPoints, menuActive, setMenuActive, playerName, setPlayerName, gameTopic, setGameTopic, gameDifficulty, setGameDifficulty, gameTime, setGameTime, cdActive, setCdActive, scoreFormActive, setScoreFormActive]}>
                     <TimeScore />
                     <GameArea />
                     <Footer countdownFunction={countdownFunction} resetFunction={resetFunction} menuFunction={menuFunction} />

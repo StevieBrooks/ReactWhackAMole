@@ -3,7 +3,7 @@ import GameContext from "../ContextFile"
 
 export default function SettingsCard( { cardActive, setCardActive } ) {
 
-    const [holesOccupied, setHolesOccupied, holes, animalArray, randomAnimalAudio, points, setPoints, menuActive, setMenuActive, playerName, setPlayerName, gameTopic, setGameTopic, gameDifficulty, setGameDifficulty, gameTime, setGameTime] = useContext(GameContext)
+    const [holesOccupied, setHolesOccupied, holes, animalArray, colorArray, randomAudio, points, setPoints, menuActive, setMenuActive, playerName, setPlayerName, gameTopic, setGameTopic, gameDifficulty, setGameDifficulty, gameTime, setGameTime, cdActive, setCdActive, scoreFormActive, setScoreFormActive] = useContext(GameContext)
 
     const [formPlayer, setFormPlayer] = useState("")
     const [formTopic, setFormTopic] = useState("")
@@ -29,8 +29,16 @@ export default function SettingsCard( { cardActive, setCardActive } ) {
     const settingsFormSubmit = (e) => {
         e.preventDefault()
         setPlayerName(formPlayer)
-        setGameTopic(formTopic)
-        setGameDifficulty(formDifficulty)
+        if(formTopic) {
+            setGameTopic(formTopic)
+        } else {
+            setGameTopic(gameTopic)
+        }
+        if(formDifficulty) {
+            setGameDifficulty(formDifficulty)
+        } else {
+            setGameDifficulty(gameDifficulty)
+        }
         setMenuActive(false)
     }
 
@@ -52,7 +60,7 @@ export default function SettingsCard( { cardActive, setCardActive } ) {
                             <option value="">--Select Topic--</option>
                             <option value="Animals">Animals</option>
                             <option value="Food">Food</option>
-                            <option value="Technology">Technology</option>
+                            <option value="Colors">Colors</option>
                             <option value="Vehicles">Vehicles</option>
                         </select>
                     </label>
