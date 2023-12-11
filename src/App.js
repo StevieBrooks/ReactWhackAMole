@@ -13,6 +13,7 @@ import MenuCard from './components/MenuCard';
 
 
 // FILE IMPORTS - IMAGES
+// animals
 import mole from "./images/animals/mole.png"
 import bird from "./images/animals/bird.png"
 import cat from "./images/animals/cat.png"
@@ -28,7 +29,40 @@ import tiger from "./images/animals/tiger.png"
 import penguin from "./images/animals/penguin.png"
 import turtle from "./images/animals/turtle.png"
 import dolphin from "./images/animals/dolphin.png"
-// replace dolphin, horse and giraffe images
+
+// foods
+import apple from "./images/foods/apple.png"
+import banana from "./images/foods/banana.png"
+import bread from "./images/foods/bread.png"
+import broccoli from "./images/foods/broccoli.png"
+import carrot from "./images/foods/carrot.png"
+import cereal from "./images/foods/cereal.png"
+import cheese from "./images/foods/cheese.png"
+import chocolate from "./images/foods/chocolate.png"
+import chicken from "./images/foods/chicken.png"
+import egg from "./images/foods/egg.png"
+import milk from "./images/foods/milk.png"
+import pasta from "./images/foods/pasta.png"
+import pizza from "./images/foods/pizza.png"
+import strawberry from "./images/foods/strawberry.png"
+import yogurt from "./images/foods/yogurt.png"
+
+// bodyparts
+import arm from "./images/bodyparts/arm.png"
+import chest from "./images/bodyparts/chest.png"
+import ear from "./images/bodyparts/ear.png"
+import elbow from "./images/bodyparts/elbow.png"
+import eye from "./images/bodyparts/eye.png"
+import foot from "./images/bodyparts/foot.png"
+import hair from "./images/bodyparts/hair.png"
+import hand from "./images/bodyparts/hand.png"
+import head from "./images/bodyparts/head.png"
+import knee from "./images/bodyparts/knee.png"
+import leg from "./images/bodyparts/leg.png"
+import mouth from "./images/bodyparts/mouth.png"
+import nose from "./images/bodyparts/nose.png"
+
+// colors
 import red from "./images/colors/red.png"
 import blue from "./images/colors/blue.png"
 import green from "./images/colors/green.png"
@@ -40,6 +74,7 @@ import white from "./images/colors/white.png"
 import grey from "./images/colors/grey.png"
 
 // FILE IMPORTS - AUDIO
+// animals
 import moleMP3 from "./audio/animals/mole.mp3"
 import birdMP3 from "./audio/animals/bird.mp3"
 import catMP3 from "./audio/animals/cat.mp3"
@@ -56,6 +91,39 @@ import penguinMP3 from "./audio/animals/penguin.mp3"
 import turtleMP3 from "./audio/animals/turtle.mp3"
 import dolphinMP3 from "./audio/animals/dolphin.mp3"
 
+// foods
+import appleMP3 from "./audio/foods/apple.mp3"
+import bananaMP3 from "./audio/foods/banana.mp3"
+import breadMP3 from "./audio/foods/bread.mp3"
+import broccoliMP3 from "./audio/foods/broccoli.mp3"
+import carrotMP3 from "./audio/foods/carrot.mp3"
+import cerealMP3 from "./audio/foods/cereal.mp3"
+import cheeseMP3 from "./audio/foods/cheese.mp3"
+import chocolateMP3 from "./audio/foods/chocolate.mp3"
+import chickenMP3 from "./audio/foods/chicken.mp3"
+import eggMP3 from "./audio/foods/egg.mp3"
+import milkMP3 from "./audio/foods/milk.mp3"
+import pastaMP3 from "./audio/foods/pasta.mp3"
+import pizzaMP3 from "./audio/foods/pizza.mp3"
+import strawberryMP3 from "./audio/foods/strawberry.mp3"
+import yogurtMP3 from "./audio/foods/yogurt.mp3"
+
+// bodyparts
+import armMP3 from "./audio/bodyparts/arm.mp3"
+import chestMP3 from "./audio/bodyparts/chest.mp3"
+import earMP3 from "./audio/bodyparts/ear.mp3"
+import elbowMP3 from "./audio/bodyparts/elbow.mp3"
+import eyeMP3 from "./audio/bodyparts/eye.mp3"
+import footMP3 from "./audio/bodyparts/foot.mp3"
+import hairMP3 from "./audio/bodyparts/hair.mp3"
+import handMP3 from "./audio/bodyparts/hand.mp3"
+import headMP3 from "./audio/bodyparts/head.mp3"
+import kneeMP3 from "./audio/bodyparts/knee.mp3"
+import legMP3 from "./audio/bodyparts/leg.mp3"
+import mouthMP3 from "./audio/bodyparts/mouth.mp3"
+import noseMP3 from "./audio/bodyparts/nose.mp3"
+
+// colors
 import redMP3 from "./audio/colors/red.mp3"
 import blueMP3 from "./audio/colors/blue.mp3"
 import greenMP3 from "./audio/colors/green.mp3"
@@ -107,6 +175,74 @@ const animalAudioArray = [
     {word: penguinMP3, name: "penguin"},
     {word: turtleMP3, name: "turtle"},
     {word: dolphinMP3, name: "dolphin"},
+]
+
+const foodArray = [
+    {icon: apple, name: "apple"},
+    {icon: banana, name: "banana"},
+    {icon: bread, name: "bread"},
+    {icon: broccoli, name: "broccoli"},
+    {icon: carrot, name: "carrot"},
+    {icon: cereal, name: "cereal"},
+    {icon: cheese, name: "cheese"},
+    {icon: chocolate, name: "chocolate"},
+    {icon: chicken, name: "chicken"},
+    {icon: egg, name: "egg"},
+    {icon: milk, name: "milk"},
+    {icon: pasta, name: "pasta"},
+    {icon: pizza, name: "pizza"},
+    {icon: strawberry, name: "strawberry"},
+    {icon: yogurt, name: "yogurt"},
+]
+
+const foodAudioArray = [
+    {word: appleMP3, name: "apple"},
+    {word: bananaMP3, name: "banana"},
+    {word: breadMP3, name: "bread"},
+    {word: broccoliMP3, name: "broccoli"},
+    {word: carrotMP3, name: "carrot"},
+    {word: cerealMP3, name: "cereal"},
+    {word: cheeseMP3, name: "cheese"},
+    {word: chocolateMP3, name: "chocolate"},
+    {word: chickenMP3, name: "chicken"},
+    {word: eggMP3, name: "egg"},
+    {word: milkMP3, name: "milk"},
+    {word: pastaMP3, name: "pasta"},
+    {word: pizzaMP3, name: "pizza"},
+    {word: strawberryMP3, name: "strawberry"},
+    {word: yogurtMP3, name: "yogurt"},
+]
+
+const bodypartsArray = [
+    {icon: arm, name: "arm"},
+    {icon: chest, name: "chest"},
+    {icon: ear, name: "ear"},
+    {icon: elbow, name: "elbow"},
+    {icon: eye, name: "eye"},
+    {icon: foot, name: "foot"},
+    {icon: hair, name: "hair"},
+    {icon: hand, name: "hand"},
+    {icon: head, name: "head"},
+    {icon: knee, name: "knee"},
+    {icon: leg, name: "leg"},
+    {icon: mouth, name: "mouth"},
+    {icon: nose, name: "nose"},
+]
+
+const bodypartsAudioArray = [
+    {word: armMP3, name: "arm"},
+    {word: chestMP3, name: "chest"},
+    {word: earMP3, name: "ear"},
+    {word: elbowMP3, name: "elbow"},
+    {word: eyeMP3, name: "eye"},
+    {word: footMP3, name: "foot"},
+    {word: hairMP3, name: "hair"},
+    {word: handMP3, name: "hand"},
+    {word: headMP3, name: "head"},
+    {word: kneeMP3, name: "knee"},
+    {word: legMP3, name: "leg"},
+    {word: mouthMP3, name: "mouth"},
+    {word: noseMP3, name: "nose"},
 ]
 
 const colorArray = [
@@ -175,6 +311,12 @@ function App() {
                             break;
                         case "Colors":
                             randomAudio = colorAudioArray[Math.floor(Math.random() * colorAudioArray.length)].word;
+                            break;
+                        case "Foods":
+                            randomAudio = foodAudioArray[Math.floor(Math.random() * foodAudioArray.length)].word;
+                            break;
+                        case "Body Parts":
+                            randomAudio = bodypartsAudioArray[Math.floor(Math.random() * bodypartsAudioArray.length)].word;
                             break;
                     }
 
@@ -310,13 +452,13 @@ function App() {
 
             {menuActive ? 
             <>
-                <GameContext.Provider value={[holesOccupied, setHolesOccupied, holes, animalArray, colorArray, randomAudio, points, setPoints, menuActive, setMenuActive, playerName, setPlayerName, gameTopic, setGameTopic, gameDifficulty, setGameDifficulty, gameTime, setGameTime, cdActive, setCdActive, scoreFormActive, setScoreFormActive]}>
+                <GameContext.Provider value={[holesOccupied, setHolesOccupied, holes, animalArray, colorArray, foodArray, bodypartsArray, randomAudio, points, setPoints, menuActive, setMenuActive, playerName, setPlayerName, gameTopic, setGameTopic, gameDifficulty, setGameDifficulty, gameTime, setGameTime, cdActive, setCdActive, scoreFormActive, setScoreFormActive]}>
                     <MenuCard />
                 </GameContext.Provider>
             </>
             : scoreFormActive ? 
             <>
-                <GameContext.Provider value={[holesOccupied, setHolesOccupied, holes, animalArray, colorArray, randomAudio, points, setPoints, menuActive, setMenuActive, playerName, setPlayerName, gameTopic, setGameTopic, gameDifficulty, setGameDifficulty, gameTime, setGameTime, cdActive, setCdActive, scoreFormActive, setScoreFormActive]}>
+                <GameContext.Provider value={[holesOccupied, setHolesOccupied, holes, animalArray, colorArray, foodArray, bodypartsArray, randomAudio, points, setPoints, menuActive, setMenuActive, playerName, setPlayerName, gameTopic, setGameTopic, gameDifficulty, setGameDifficulty, gameTime, setGameTime, cdActive, setCdActive, scoreFormActive, setScoreFormActive]}>
                     <ScoreForm />
                 </GameContext.Provider>
             </>
@@ -324,7 +466,7 @@ function App() {
             <>
                 <Header h1Title="Whack-a-Mole" />
 
-                <GameContext.Provider value={[holesOccupied, setHolesOccupied, holes, animalArray, colorArray, randomAudio, points, setPoints, menuActive, setMenuActive, playerName, setPlayerName, gameTopic, setGameTopic, gameDifficulty, setGameDifficulty, gameTime, setGameTime, cdActive, setCdActive, scoreFormActive, setScoreFormActive]}>
+                <GameContext.Provider value={[holesOccupied, setHolesOccupied, holes, animalArray, colorArray, foodArray, bodypartsArray, randomAudio, points, setPoints, menuActive, setMenuActive, playerName, setPlayerName, gameTopic, setGameTopic, gameDifficulty, setGameDifficulty, gameTime, setGameTime, cdActive, setCdActive, scoreFormActive, setScoreFormActive]}>
                     <TimeScore />
                     <GameArea />
                     <Footer countdownFunction={countdownFunction} resetFunction={resetFunction} menuFunction={menuFunction} />
@@ -351,4 +493,9 @@ export default App;
 - scoreboard choice in menu
 - give holes numbers 1-9 - kids will love shouting that out to their mates who are playing in class
 
+*/
+
+
+/* MAKE CLEANER!!!!!!!!!!!!!!!!
+    - after each wordcall, users gets specific amt of time. Once elapsed, first clear all holes, then new wordcall, then images appear. Should make less buggy.
 */

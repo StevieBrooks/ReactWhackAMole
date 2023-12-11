@@ -3,7 +3,7 @@ import GameContext from "../ContextFile"
 
 export default function SettingsCard( { cardActive, setCardActive } ) {
 
-    const [holesOccupied, setHolesOccupied, holes, animalArray, colorArray, randomAudio, points, setPoints, menuActive, setMenuActive, playerName, setPlayerName, gameTopic, setGameTopic, gameDifficulty, setGameDifficulty, gameTime, setGameTime, cdActive, setCdActive, scoreFormActive, setScoreFormActive] = useContext(GameContext)
+    const [holesOccupied, setHolesOccupied, holes, animalArray, colorArray, foodArray, bodypartsArray, randomAudio, points, setPoints, menuActive, setMenuActive, playerName, setPlayerName, gameTopic, setGameTopic, gameDifficulty, setGameDifficulty, gameTime, setGameTime, cdActive, setCdActive, scoreFormActive, setScoreFormActive] = useContext(GameContext)
 
     const [formPlayer, setFormPlayer] = useState("")
     const [formTopic, setFormTopic] = useState("")
@@ -59,9 +59,9 @@ export default function SettingsCard( { cardActive, setCardActive } ) {
                         <select name="gameTopic" id="gameTopic" onChange={(e) => topicChange(e.target.value)}>
                             <option value="">--Select Topic--</option>
                             <option value="Animals">Animals</option>
-                            <option value="Food">Food</option>
+                            <option value="Foods">Foods</option>
                             <option value="Colors">Colors</option>
-                            <option value="Vehicles">Vehicles</option>
+                            <option value="Body Parts">Body Parts</option>
                         </select>
                     </label>
 

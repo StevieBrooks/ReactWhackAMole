@@ -3,7 +3,7 @@ import GameContext from "../ContextFile"
 
 export default function Hole( { id, occupied, randomVal, clickHandler } ) {
 
-    const [holesOccupied, setHolesOccupied, holes, animalArray, colorArray, randomAudio, points, setPoints, menuActive, setMenuActive, playerName, setPlayerName, gameTopic, setGameTopic, gameDifficulty, setGameDifficulty, gameTime, setGameTime, cdActive, setCdActive, scoreFormActive, setScoreFormActive] = useContext(GameContext)
+    const [holesOccupied, setHolesOccupied, holes, animalArray, colorArray, foodArray, bodypartsArray, randomAudio, points, setPoints, menuActive, setMenuActive, playerName, setPlayerName, gameTopic, setGameTopic, gameDifficulty, setGameDifficulty, gameTime, setGameTime, cdActive, setCdActive, scoreFormActive, setScoreFormActive] = useContext(GameContext)
 
     const [holeImage, setHoleImage] = useState()
 
@@ -46,6 +46,28 @@ export default function Hole( { id, occupied, randomVal, clickHandler } ) {
                     return returnVal[0].icon
                 } else {
                     return colorArray[Math.floor(Math.random() * colorArray.length)].icon
+                }
+            case "Foods":
+                if(randomVal === id) {
+                    const returnVal = foodArray.filter(item => {
+                        if(item.name === wordCall) {
+                            return item.icon;
+                        }
+                    })
+                    return returnVal[0].icon
+                } else {
+                    return foodArray[Math.floor(Math.random() * foodArray.length)].icon
+                }
+            case "Body Parts":
+                if(randomVal === id) {
+                    const returnVal = bodypartsArray.filter(item => {
+                        if(item.name === wordCall) {
+                            return item.icon;
+                        }
+                    })
+                    return returnVal[0].icon
+                } else {
+                    return bodypartsArray[Math.floor(Math.random() * bodypartsArray.length)].icon
                 }
         }
     

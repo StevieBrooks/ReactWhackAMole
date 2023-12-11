@@ -5,7 +5,7 @@ import GameContext from "../ContextFile"
 
 export default function GameArea() {
 
-    const [holesOccupied, setHolesOccupied, holes, animalArray, colorArray, randomAudio, points, setPoints, menuActive, setMenuActive, playerName, setPlayerName, gameTopic, setGameTopic, gameDifficulty, setGameDifficulty, gameTime, setGameTime, cdActive, setCdActive, scoreFormActive, setScoreFormActive] = useContext(GameContext)
+    const [holesOccupied, setHolesOccupied, holes, animalArray, colorArray, foodArray, bodypartsArray, randomAudio, points, setPoints, menuActive, setMenuActive, playerName, setPlayerName, gameTopic, setGameTopic, gameDifficulty, setGameDifficulty, gameTime, setGameTime, cdActive, setCdActive, scoreFormActive, setScoreFormActive] = useContext(GameContext)
     
     let occupiedHoles = useRef([])
     const [randomVal, setRandomVal] = useState(0)
@@ -22,10 +22,6 @@ export default function GameArea() {
         const matchImgWord = imgWord.match(regex)
         const imgWordToMatch = matchImgWord[1].split("/")
         const clickedImg = imgWordToMatch[4]
-
-        console.log(wordCall)
-        console.log(clickedImg)
-        console.log(gameDifficulty)
 
         if(wordCall === clickedImg) {
             switch(gameDifficulty) {
