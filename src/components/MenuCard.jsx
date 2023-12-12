@@ -76,16 +76,16 @@ export default function MenuCard() {
     return ( <>
     
                 <div className={`menu-container ${(settingsCardActive || scoreboardActive || feedbackCardActive || instructionsCardActive) && "hidden"}`}>
-                        <div className="menu flex flex-col items-center">
-                            <header>
-                                <h2 className="font-bold">Game Menu</h2>
+                        <div className="menu flex flex-col items-center text-cream">
+                            <header className="py-5 font-bold tracking-widest text-2xl">
+                                <h2>Game Menu</h2>
                             </header>
                             <ul className="mt-5 flex flex-col items-center">
-                                <li className="py-2" onClick={instructionsCardFunction}>Instructions</li>
-                                <li className="py-2" onClick={settingsCardFunction}>Settings</li>
-                                <li className="py-2" onClick={scoreboardFunction}>Scoreboard</li>
-                                <li className="py-2" onClick={feedbackCardFunction}>Leave Feedback</li>
-                                <li className="py-2" onClick={exitMenuFunction}>Exit Menu</li>
+                                <li className="py-5 text-xl tracking-wider hover:cursor-pointer hover:underline underline-offset-8" onClick={instructionsCardFunction}>Instructions</li>
+                                <li className="py-5 text-xl tracking-wider hover:cursor-pointer hover:underline underline-offset-8" onClick={settingsCardFunction}>Settings</li>
+                                <li className="py-5 text-xl tracking-wider hover:cursor-pointer hover:underline underline-offset-8" onClick={scoreboardFunction}>Scoreboard</li>
+                                <li className="py-5 text-xl tracking-wider hover:cursor-pointer hover:underline underline-offset-8" onClick={feedbackCardFunction}>Leave Feedback</li>
+                                <li className="py-5 text-xl tracking-wider hover:cursor-pointer hover:underline underline-offset-8" onClick={exitMenuFunction}>Exit Menu</li>
                             </ul>
                         </div>
                     </div>

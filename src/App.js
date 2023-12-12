@@ -446,30 +446,32 @@ function App() {
         setPoints(0)
     }
 
-    useEffect(() => {
-        const cursor = document.querySelector('.cursor')
+    // useEffect(() => {
+    //     const cursor = document.querySelector('.cursor')
 
-        const updateCursorPosition = (e) => {
-            cursor.style.top = e.pageY - cursor.offsetHeight / 2 + 'px';
-            cursor.style.left = e.pageX - cursor.offsetWidth / 2 + 'px';
-        };
+    //     const updateCursorPosition = (e) => {
+    //         cursor.style.top = e.pageY - cursor.offsetHeight / 2 + 'px';
+    //         cursor.style.left = e.pageX - cursor.offsetWidth / 2 + 'px';
+    //     };
 
-        window.addEventListener('mousemove', updateCursorPosition)
+    //     window.addEventListener('mousemove', updateCursorPosition)
 
-        window.addEventListener('mousedown', () => {
-            cursor.classList.add('active')
-        })
+    //     window.addEventListener('mousedown', () => {
+    //         cursor.classList.add('active')
+    //     })
 
-        window.addEventListener('mouseup', () => {
-            cursor.classList.remove('active')
-        })
-    })
+    //     window.addEventListener('mouseup', () => {
+    //         cursor.classList.remove('active')
+    //     })
+    // })
 
     
 
   return (<>
+
+        <div className='overlay w-full h-full bg-darkergreen absolute opacity-50'></div>
     
-        <div className="game-container rounded-xl w-11/12 h-fit max-w-xl mx-auto relative top-20 bg-[#588157]">
+        <div className="game-container rounded-xl w-11/12 h-[25.6rem] phone:h-[34.6rem] max-w-xl mx-auto relative top-20 bg-gradient-to-br from-darkgreen to-green shadow-md shadow-darkergreen z-10">
 
             {menuActive ? 
             <>

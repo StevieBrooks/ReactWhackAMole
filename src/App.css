@@ -3,9 +3,12 @@
 }
 
 body {
-    background-color: #dad7cd;
+    background: url('images/background.jpg') center/cover;
 }
 
+
+
+/* 
 .cursor {
     height: 12vw;
     width: 12vw;
@@ -20,4 +23,4 @@ body {
 
 .cursor.active {
     transform: rotate(-5deg);
-}
+} */
