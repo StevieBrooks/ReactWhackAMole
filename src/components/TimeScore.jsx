@@ -8,7 +8,7 @@ export default function TimeScore() {
     
     return (
 
-        <div className="time-and-score flex justify-evenly p-3 border">
+        <div className="time-and-score flex justify-evenly py-3 border-b border-cream text-cream text-xl font-bold tracking-wider">
             <div className="time">
                 <p>Time: <span>{gameTime}</span></p>
             </div>

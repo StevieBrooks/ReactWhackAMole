@@ -3,5 +3,21 @@
 }
 
 body {
-    background-color: rgb(83, 45, 9);
+    background-color: #dad7cd;
+}
+
+.cursor {
+    height: 12vw;
+    width: 12vw;
+    position: absolute;
+    background-image: url('images/hammer.png');
+    background-size: 100% 100%;
+    cursor: url('images/hammer.png'), auto;
+    transform: rotate(30deg);
+    transform-origin: center;
+    transition: transform .1s;
+}
+
+.cursor.active {
+    transform: rotate(-5deg);
 }

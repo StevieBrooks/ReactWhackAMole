@@ -446,9 +446,30 @@ function App() {
         setPoints(0)
     }
 
+    useEffect(() => {
+        const cursor = document.querySelector('.cursor')
+
+        const updateCursorPosition = (e) => {
+            cursor.style.top = e.pageY - cursor.offsetHeight / 2 + 'px';
+            cursor.style.left = e.pageX - cursor.offsetWidth / 2 + 'px';
+        };
+
+        window.addEventListener('mousemove', updateCursorPosition)
+
+        window.addEventListener('mousedown', () => {
+            cursor.classList.add('active')
+        })
+
+        window.addEventListener('mouseup', () => {
+            cursor.classList.remove('active')
+        })
+    })
+
+    
+
   return (<>
     
-        <div className="game-container border rounded w-11/12 h-fit max-w-xl mx-auto relative top-20 bg-[#64c516]">
+        <div className="game-container rounded-xl w-11/12 h-fit max-w-xl mx-auto relative top-20 bg-[#588157]">
 
             {menuActive ? 
             <>
@@ -464,12 +485,13 @@ function App() {
             </>
             :
             <>
-                <Header h1Title="Whack-a-Mole" />
+                {/* <Header h1Title="Whack-a-Mole" /> */}
 
                 <GameContext.Provider value={[holesOccupied, setHolesOccupied, holes, animalArray, colorArray, foodArray, bodypartsArray, randomAudio, points, setPoints, menuActive, setMenuActive, playerName, setPlayerName, gameTopic, setGameTopic, gameDifficulty, setGameDifficulty, gameTime, setGameTime, cdActive, setCdActive, scoreFormActive, setScoreFormActive]}>
                     <TimeScore />
                     <GameArea />
                     <Footer countdownFunction={countdownFunction} resetFunction={resetFunction} menuFunction={menuFunction} />
+                    <div className='cursor'></div>
                 </GameContext.Provider>
 
             </>
