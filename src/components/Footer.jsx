@@ -10,10 +10,10 @@ export default function Footer({countdownFunction, resetFunction, menuFunction})
 
     return (
 
-        <footer className="border-t border-cream flex justify-evenly text-cream font-bold py-1">
-            <Button btnTitle="Play" btnAction={countdownFunction} className="py-1 px-3 m-1 border tracking-wider rounded hover:bg-green" />
-            <Button btnTitle="Reset" btnAction={resetFunction} className="py-1 px-3 m-1 border tracking-wider rounded hover:bg-green" />
-            <Button btnTitle="Menu" btnAction={menuFunction} className="py-1 px-3 m-1 border tracking-wider rounded hover:bg-green" />
+        <footer className="flex justify-evenly text-cream font-bold py-1">
+            <Button btnTitle="Play" btnAction={countdownFunction} className="py-1 px-3 m-1 border border-lightgreen tracking-wider rounded hover:bg-green relative hover:bottom-0.5" />
+            <Button btnTitle="Reset" btnAction={resetFunction} className="py-1 px-3 m-1 border border-lightgreen tracking-wider rounded hover:bg-green relative hover:bottom-0.5" />
+            <Button btnTitle="Menu" btnAction={menuFunction} className="py-1 px-3 m-1 border border-lightgreen tracking-wider rounded hover:bg-green relative hover:bottom-0.5" />
         </footer>
 
     )

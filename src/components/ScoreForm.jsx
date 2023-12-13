@@ -37,27 +37,32 @@ export default function ScoreForm() {
     return (
 
         <>
-        
-            <h2>Great Work!</h2>    
-            <p>Record your high score here:</p>
-            <form className="flex flex-col" action="http://localhost:8000/add_score.php" method="POST" onSubmit={(e) => submitForm(e)}>
 
-                {/* hide these readonly inputs and display their values in paragraphs for nicer UX */}
-                <input className="hidden" type="text" name="difficulty" value={gameDifficulty} readOnly />
-                <p>Game Difficulty: {gameDifficulty}</p>
+            <div className="scoreform-container flex flex-col items-center text-cream">
+                <header className="py-5 mb-5 font-bold tracking-widest text-2xl underline underline-offset-8">
+                    <h2>Record Your Score</h2>
+                </header>
 
-                <input className="hidden" type="text" name="topic" value={gameTopic} readOnly />
-                <p>Game Topic: {gameTopic}</p>
+                <form className="flex flex-col items-center" action="http://localhost:8000/add_score.php" method="POST" onSubmit={(e) => submitForm(e)}>
 
-                <input className="hidden" type="number" name="score" value={points} readOnly />
-                <p>Final Score: {points}</p>
+                    {/* hide these readonly inputs and display their values in paragraphs for nicer UX */}
+                    <input className="hidden" type="text" name="difficulty" value={gameDifficulty} readOnly />
+                    <p className="py-2 text-xl tracking-wider"><strong>Game Difficulty:</strong> {gameDifficulty}</p>
 
-                <input type="text" name="user" onChange={(e) => setPlayerName(e.target.value)} placeholder="Enter name..." defaultValue={playerName} required />
+                    <input className="hidden" type="text" name="topic" value={gameTopic} readOnly />
+                    <p className="py-2 text-xl tracking-wider"><strong>Game Topic</strong>: {gameTopic}</p>
+
+                    <input className="hidden" type="number" name="score" value={points} readOnly />
+                    <p className="py-2 text-xl tracking-wider"><strong>Final Score:</strong> {points}</p>
+
+                    <input className="my-3 phone:my-5 p-2 rounded-md bg-darkergreen text-cream placeholder:text-cream shadow-md shadow-green" type="text" name="user" onChange={(e) => setPlayerName(e.target.value)} placeholder="Enter name..." defaultValue={playerName} required />
 
 
-                <button type="submit" name="score_submit">Submit</button>
+                    <button className="my-3 phone:my-5 mx-auto p-2 w-2/3 rounded-md bg-darkergreen text-cream font-bold tracking-wider shadow-md shadow-green hover:bg-darkgreen" type="submit" name="score_submit">Submit</button>
 
-            </form>
+                </form>
+                
+            </div>
 
         </>
 

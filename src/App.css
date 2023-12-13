@@ -6,6 +6,15 @@ body {
     background: url('images/background.jpg') center/cover;
 }
 
+.table-container::-webkit-scrollbar {
+    width: 5px;
+    background-color: #3a5a40;
+}
+
+.table-container::-webkit-scrollbar-thumb {
+    background-color: #588517;
+}
+
 
 
 /* 

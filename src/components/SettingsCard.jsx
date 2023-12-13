@@ -1,5 +1,6 @@
 import { useContext, useState } from "react"
 import GameContext from "../ContextFile"
+import Button from "./Button"
 
 export default function SettingsCard( { cardActive, setCardActive } ) {
 
@@ -46,46 +47,34 @@ export default function SettingsCard( { cardActive, setCardActive } ) {
 
         <>
         
-            <div className="settings-container h-full">
-                <header>
-                    <h2 className="font-bold text-center">Game Settings</h2>
+            <div className="settings-container flex flex-col items-center text-cream">
+                <header className="py-5 font-bold tracking-widest text-2xl text-center">
+                    <h2>Game Settings</h2>
                 </header>
                 
-                <form className="flex flex-col h-max w-11/12 mx-auto" action="" onSubmit={settingsFormSubmit}>
+                <form className="flex flex-col h-full w-11/12 max-w-md mx-auto" action="" onSubmit={settingsFormSubmit}>
 
-                    <input type="text" name="nameInput" onChange={(e) => nameChange(e.target.value)} placeholder="Player Name..." />
+                    <input className="my-3 phone:my-5 p-2 rounded-md bg-darkergreen text-cream placeholder:text-cream shadow-md shadow-green" type="text" name="nameInput" onChange={(e) => nameChange(e.target.value)} placeholder="Player Name..." />
 
-                    <label htmlFor="gameTopic">Game Topic:
-                        <select name="gameTopic" id="gameTopic" onChange={(e) => topicChange(e.target.value)}>
+                        <select className="my-3 phone:my-5 p-2 rounded-md bg-darkergreen text-cream placeholder:text-cream shadow-md shadow-green" name="gameTopic" id="gameTopic" onChange={(e) => topicChange(e.target.value)}>
                             <option value="">--Select Topic--</option>
                             <option value="Animals">Animals</option>
                             <option value="Foods">Foods</option>
                             <option value="Colors">Colors</option>
                             <option value="Body Parts">Body Parts</option>
                         </select>
-                    </label>
 
-                    <label htmlFor="gameDifficulty">Game Difficulty
-                        <select name="gameDifficulty" id="gameDifficulty" onChange={(e) => difficultyChange(e.target.value)}>
+                        <select className="my-3 phone:my-5 p-2 rounded-md bg-darkergreen text-cream placeholder:text-cream shadow-md shadow-green" name="gameDifficulty" id="gameDifficulty" onChange={(e) => difficultyChange(e.target.value)}>
                             <option value="">--Select Difficulty--</option>
                             <option value="Easy">Easy</option>
                             <option value="Medium">Medium</option>
                             <option value="Hard">Hard</option>
                         </select>
-                    </label>
             
-                    {/* <div className="players">
-                        <label htmlFor="singlePlayer">Single:
-                            <input type="radio" name="singlePlayer" />
-                        </label>
-            
-                        <label htmlFor="singlePlayer">Multi:
-                            <input type="radio" name="multiPlayer" />
-                        </label>
-                    </div> */}
-                    <button className="border w-fit p-1 m-1" type="submit">Submit Form</button>
+                    <button className="my-3 phone:my-5 mx-auto p-2 w-2/3 rounded-md bg-darkergreen text-cream font-bold tracking-wider shadow-md shadow-green hover:bg-darkgreen" type="submit">Submit Form</button>
                 </form>
-                <button onClick={returnMenuFunction}>Exit Settings</button>
+                
+                <Button btnTitle="Exit Settings" btnAction={returnMenuFunction} className="text-xl py-5 hover:cursor-pointer hover:underline underline-offset-8" /> 
 
             </div>
         
