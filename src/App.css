@@ -4,6 +4,7 @@
 
 body {
     background: url('images/background.jpg') center/cover;
+    cursor: none;
 }
 
 .table-container::-webkit-scrollbar {
@@ -14,22 +15,36 @@ body {
 .table-container::-webkit-scrollbar-thumb {
     background-color: #588517;
 }
-
-
-
 /* 
+.hole-image {
+    animation: rise 2s ease-out;
+}
+
+@keyframes rise {
+    0% {
+        transform: translateY(0);
+    } 50% {
+        transform: translateY(100%);
+    }
+    100% {
+        transform: translateY(0);
+    }
+}
+ */
+
+
 .cursor {
-    height: 12vw;
-    width: 12vw;
-    position: absolute;
+    height: 120px;
+    width: 100px;
+    position: fixed;
     background-image: url('images/hammer.png');
     background-size: 100% 100%;
-    cursor: url('images/hammer.png'), auto;
     transform: rotate(30deg);
     transform-origin: center;
+    pointer-events: none;
     transition: transform .1s;
 }
 
 .cursor.active {
     transform: rotate(-5deg);
-} */
+}

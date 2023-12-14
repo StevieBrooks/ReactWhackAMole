@@ -446,24 +446,25 @@ function App() {
         setPoints(0)
     }
 
-    // useEffect(() => {
-    //     const cursor = document.querySelector('.cursor')
+    useEffect(() => {
+        const cursor = document.querySelector('.cursor')
 
-    //     const updateCursorPosition = (e) => {
-    //         cursor.style.top = e.pageY - cursor.offsetHeight / 2 + 'px';
-    //         cursor.style.left = e.pageX - cursor.offsetWidth / 2 + 'px';
-    //     };
+        const updateCursorPosition = (e) => {
 
-    //     window.addEventListener('mousemove', updateCursorPosition)
+            cursor.style.top = (e.clientY - cursor.offsetHeight / 2) + 'px';
+            cursor.style.left = (e.clientX - cursor.offsetWidth / 5) + 'px';
+        };
 
-    //     window.addEventListener('mousedown', () => {
-    //         cursor.classList.add('active')
-    //     })
+        window.addEventListener('mousemove', updateCursorPosition)
 
-    //     window.addEventListener('mouseup', () => {
-    //         cursor.classList.remove('active')
-    //     })
-    // })
+        window.addEventListener('mousedown', () => {
+            cursor.classList.add('active')
+        })
+
+        window.addEventListener('mouseup', () => {
+            cursor.classList.remove('active')
+        })
+    })
 
     
 
@@ -472,6 +473,8 @@ function App() {
         <div className='overlay w-full h-full bg-darkergreen absolute opacity-50'></div>
     
         <div className="game-container rounded-xl w-11/12 h-[25.6rem] phone:h-[34.6rem] max-w-xl mx-auto relative top-20 bg-gradient-to-br from-darkgreen to-green shadow-md shadow-darkergreen z-10">
+
+        <div className='cursor z-10'></div>
 
             {menuActive ? 
             <>
@@ -493,7 +496,7 @@ function App() {
                     <TimeScore />
                     <GameArea />
                     <Footer countdownFunction={countdownFunction} resetFunction={resetFunction} menuFunction={menuFunction} />
-                    <div className='cursor'></div>
+                    
                 </GameContext.Provider>
 
             </>

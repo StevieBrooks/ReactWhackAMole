@@ -2,6 +2,7 @@ import Hole from "./Hole"
 // import Mole from "../images/mole.png"
 import { useRef, useContext, useEffect, useState } from "react";
 import GameContext from "../ContextFile"
+import smashSound from "../audio/boing.mp3"
 
 export default function GameArea() {
 
@@ -10,8 +11,11 @@ export default function GameArea() {
     let occupiedHoles = useRef([])
     const [randomVal, setRandomVal] = useState(0)
     const [imageClicked, setImageClicked] = useState(false)
+    const boingSound = new Audio(smashSound)
 
     const imgClickHandler = (e) => {
+
+        boingSound.play()
 
         const regex = /\/(.*?)\./
         const match = randomAudio.match(regex);
