@@ -447,22 +447,35 @@ function App() {
     }
 
     useEffect(() => {
+
+        document.body.style.cursor = menuActive || scoreFormActive ? "default" : "none"
+
         const cursor = document.querySelector('.cursor')
 
         const updateCursorPosition = (e) => {
 
-            cursor.style.top = (e.clientY - cursor.offsetHeight / 2) + 'px';
-            cursor.style.left = (e.clientX - cursor.offsetWidth / 5) + 'px';
+            if(!menuActive && !scoreFormActive) {
+
+                cursor.style.top = (e.clientY - cursor.offsetHeight / 2) + 'px';
+                cursor.style.left = (e.clientX - cursor.offsetWidth / 5) + 'px';
+            }
+
         };
 
         window.addEventListener('mousemove', updateCursorPosition)
 
         window.addEventListener('mousedown', () => {
-            cursor.classList.add('active')
+            if(!menuActive && !scoreFormActive) {
+
+                cursor.classList.add('active')
+            }
         })
 
         window.addEventListener('mouseup', () => {
-            cursor.classList.remove('active')
+            if(!menuActive && !scoreFormActive) {
+
+                cursor.classList.remove('active')
+            }
         })
     })
 
@@ -474,7 +487,7 @@ function App() {
     
         <div className="game-container rounded-xl w-11/12 h-[25.6rem] phone:h-[34.6rem] max-w-xl mx-auto relative top-20 bg-gradient-to-br from-darkgreen to-green shadow-md shadow-darkergreen z-10">
 
-        <div className='cursor z-10'></div>
+        <div className={`${(!menuActive && !scoreFormActive) && "cursor"} z-10`}></div>
 
             {menuActive ? 
             <>
