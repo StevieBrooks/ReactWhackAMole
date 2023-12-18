@@ -7,12 +7,12 @@ body {
     cursor: none;
 }
 
-.table-container::-webkit-scrollbar {
+.table-container::-webkit-scrollbar, .feedback-display::-webkit-scrollbar {
     width: 5px;
     background-color: #3a5a40;
 }
 
-.table-container::-webkit-scrollbar-thumb {
+.table-container::-webkit-scrollbar-thumb, .feedback-display::-webkit-scrollbar-thumb {
     background-color: #588517;
 }
 /* 

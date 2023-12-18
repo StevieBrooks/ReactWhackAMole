@@ -49,7 +49,7 @@ export default function MenuCard( { scoreResults, feedbackResults } ) {
 
                                 <li className="py-4 phone:py-5 text-xl tracking-wider hover:cursor-pointer hover:underline underline-offset-8" onClick={scoreboardFunction}>Scoreboard</li>
 
-                                <li className="py-4 phone:py-5 text-xl tracking-wider hover:cursor-pointer hover:underline underline-offset-8" onClick={feedbackCardFunction}>Leave Feedback</li>
+                                <li className="py-4 phone:py-5 text-xl tracking-wider hover:cursor-pointer hover:underline underline-offset-8" onClick={feedbackCardFunction}>Feedback</li>
 
                                 <li className="py-4 phone:py-5 text-xl tracking-wider hover:cursor-pointer hover:underline underline-offset-8" onClick={exitMenuFunction}>Exit Menu</li>
 
