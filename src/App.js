@@ -446,11 +446,12 @@ function App() {
         setPoints(0)
     }
 
+    let cursor;
     useEffect(() => {
 
         document.body.style.cursor = menuActive || scoreFormActive ? "default" : "none"
 
-        const cursor = document.querySelector('.cursor')
+        cursor = document.querySelector('.cursor')
 
         const updateCursorPosition = (e) => {
 
@@ -478,6 +479,16 @@ function App() {
             }
         })
     })
+    
+    const mouseoverFunction = () => {
+        cursor.style.display = "none"
+        document.body.style.cursor = "default"
+    }
+    
+    const mouseoutFunction = () => {
+        cursor.style.display = "block"
+        document.body.style.cursor = "none"
+    }
 
     
 
@@ -508,7 +519,7 @@ function App() {
                 <GameContext.Provider value={[holesOccupied, setHolesOccupied, holes, animalArray, colorArray, foodArray, bodypartsArray, randomAudio, points, setPoints, menuActive, setMenuActive, playerName, setPlayerName, gameTopic, setGameTopic, gameDifficulty, setGameDifficulty, gameTime, setGameTime, cdActive, setCdActive, scoreFormActive, setScoreFormActive]}>
                     <TimeScore />
                     <GameArea />
-                    <Footer countdownFunction={countdownFunction} resetFunction={resetFunction} menuFunction={menuFunction} />
+                    <Footer countdownFunction={countdownFunction} resetFunction={resetFunction} menuFunction={menuFunction} mouseover={mouseoverFunction} mouseout={mouseoutFunction} />
                     
                 </GameContext.Provider>
 
