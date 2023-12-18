@@ -449,11 +449,43 @@ function populateHoles() {
         setPoints(0)
     }
 
+
+    let scoreResults = useRef([])
+    let feedbackResults = useRef([])
+
     const menuFunction = () => {
         setMenuActive(true)
         setCdActive(false)
         setHolesOccupied(Array(9).fill(null))
         setPoints(0)
+
+        const scoreXhr = new XMLHttpRequest();
+    
+        scoreXhr.open('GET', 'http://localhost:8000/get_scores.php');
+        // xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+
+        scoreXhr.addEventListener('readystatechange', function () {
+            if (this.readyState === this.DONE) {
+                scoreResults.current = JSON.parse(this.responseText)
+                console.log(scoreResults)
+            }
+        });
+
+        scoreXhr.send();
+
+        const fbXhr = new XMLHttpRequest();
+    
+        fbXhr.open('GET', 'http://localhost:8000/get_feedback.php');
+        // xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+
+        fbXhr.addEventListener('readystatechange', function () {
+            if (this.readyState === this.DONE) {
+                feedbackResults.current = JSON.parse(this.responseText)
+                console.log(feedbackResults)
+            }
+        });
+
+        fbXhr.send();
     }
 
     let cursor;
@@ -519,7 +551,7 @@ function populateHoles() {
             {menuActive ? 
             <>
                 <GameContext.Provider value={[holesOccupied, setHolesOccupied, holes, animalArray, colorArray, foodArray, bodypartsArray, randomAudio, points, setPoints, menuActive, setMenuActive, playerName, setPlayerName, gameTopic, setGameTopic, gameDifficulty, setGameDifficulty, gameTime, setGameTime, cdActive, setCdActive, scoreFormActive, setScoreFormActive]}>
-                    <MenuCard />
+                    <MenuCard scoreResults={scoreResults} feedbackResults={feedbackResults} />
                 </GameContext.Provider>
             </>
             : scoreFormActive ? 
@@ -563,6 +595,6 @@ export default App;
 */
 
 
-/* MAKE CLEANER!!!!!!!!!!!!!!!!
-    - after each wordcall, users gets specific amt of time. Once elapsed, first clear all holes, then new wordcall, then images appear. Should make less buggy.
+/* SCOREFORM
+    - should only display if new high score is achieved for that topic and difficulty combo
 */
