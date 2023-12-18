@@ -4,7 +4,7 @@ import { useRef, useContext, useEffect, useState } from "react";
 import GameContext from "../ContextFile"
 import smashSound from "../audio/boing.mp3"
 
-export default function GameArea() {
+export default function GameArea( { mousemove } ) {
 
     const [holesOccupied, setHolesOccupied, holes, animalArray, colorArray, foodArray, bodypartsArray, randomAudio, points, setPoints, menuActive, setMenuActive, playerName, setPlayerName, gameTopic, setGameTopic, gameDifficulty, setGameDifficulty, gameTime, setGameTime, cdActive, setCdActive, scoreFormActive, setScoreFormActive] = useContext(GameContext)
     
@@ -80,7 +80,7 @@ export default function GameArea() {
     }, [holesOccupied])
 
     return (
-        <div className="game-area w-fit mx-auto grid grid-cols-3 grid-flow-row justify-items-center py-5">
+        <div className="game-area w-fit mx-auto grid grid-cols-3 grid-flow-row justify-items-center py-5" onMouseMove={mousemove}>
             {holes.map((hole, index) => (
                 <Hole key={index} id={index} occupied={holesOccupied[index]} randomVal={randomVal} clickHandler={imgClickHandler} />
             ))}

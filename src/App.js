@@ -294,10 +294,10 @@ function App() {
     - needs to be at least one correct image per call (to keep interesting)
     - click two correct images per call - double points
 */
-async function clearHoles() {
+function clearHoles() {
     
     setHolesOccupied(Array(9).fill(null))
-    await audioSet()
+    audioSet()
 }
 
 function audioSet() {
@@ -322,7 +322,7 @@ function audioSet() {
         const audio = new Audio(randomAudio);
         audio.play();
 
-        setTimeout(populateHoles, 1000)
+        setTimeout(populateHoles, 500)
         return randomAudio;
     }); 
 }
@@ -386,7 +386,7 @@ function populateHoles() {
                 gameInterval.current = 2000;
                 break;
             case "Medium":
-                gameInterval.current = 3000;
+                gameInterval.current = 3500;
                 break;
             case "Easy":
                 gameInterval.current = 5000;
@@ -500,6 +500,12 @@ function populateHoles() {
         document.body.style.cursor = "none"
     }
 
+    const mousemoveFunction = () => {
+        if(!menuActive && !scoreFormActive) {
+            cursor.style.display = "block"
+            document.body.style.cursor = "none"
+        }
+    }
     
 
   return (<>
@@ -528,7 +534,7 @@ function populateHoles() {
 
                 <GameContext.Provider value={[holesOccupied, setHolesOccupied, holes, animalArray, colorArray, foodArray, bodypartsArray, randomAudio, points, setPoints, menuActive, setMenuActive, playerName, setPlayerName, gameTopic, setGameTopic, gameDifficulty, setGameDifficulty, gameTime, setGameTime, cdActive, setCdActive, scoreFormActive, setScoreFormActive]}>
                     <TimeScore />
-                    <GameArea />
+                    <GameArea mousemove={mousemoveFunction} />
                     <Footer countdownFunction={countdownFunction} resetFunction={resetFunction} menuFunction={menuFunction} mouseover={mouseoverFunction} mouseout={mouseoutFunction} />
                     
                 </GameContext.Provider>
