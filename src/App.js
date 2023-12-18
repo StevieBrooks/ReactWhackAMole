@@ -277,7 +277,7 @@ function App() {
 
 // STATE 
     const [holesOccupied, setHolesOccupied] = useState(Array(9).fill(null))
-    const [randomAudio, setRandomAudio] = useState()
+    let [randomAudio, setRandomAudio] = useState()
     const [points, setPoints] = useState(0)
     const [menuActive, setMenuActive] = useState(false)
     const [playerName, setPlayerName] = useState("")
@@ -294,61 +294,71 @@ function App() {
     - needs to be at least one correct image per call (to keep interesting)
     - click two correct images per call - double points
 */
+async function clearHoles() {
+    
+    setHolesOccupied(Array(9).fill(null))
+    await audioSet()
+}
 
+function audioSet() {
+    setRandomAudio(prevRandomAudio => {
+
+        switch(gameTopic) {
+            case "Animals":
+                randomAudio = animalAudioArray[Math.floor(Math.random() * animalAudioArray.length)].word;
+                break;
+            case "Colors":
+                randomAudio = colorAudioArray[Math.floor(Math.random() * colorAudioArray.length)].word;
+                break;
+            case "Foods":
+                randomAudio = foodAudioArray[Math.floor(Math.random() * foodAudioArray.length)].word;
+                break;
+            case "Body Parts":
+                randomAudio = bodypartsAudioArray[Math.floor(Math.random() * bodypartsAudioArray.length)].word;
+                break;
+        }
+
+        
+        const audio = new Audio(randomAudio);
+        audio.play();
+
+        setTimeout(populateHoles, 1000)
+        return randomAudio;
+    }); 
+}
+
+function populateHoles() {
+    const numOfHoles = Math.floor(Math.random() * 4) + 2
+    const holesToPop = []
+    for(let i = 0; i < numOfHoles; i++) {
+        const holePop = Math.floor(Math.random() * holes.length)
+        if(!holesToPop.includes(holePop)) {
+            holesToPop.push(holePop)
+        }
+    }
+    while(holesToPop.length < numOfHoles) {
+        const holePop = Math.floor(Math.random() * holes.length)
+        if(!holesToPop.includes(holePop)) {
+            holesToPop.push(holePop)
+        }
+    }
+
+    updatedHoles = Array(9).fill(null)
+    holesToPop.forEach(item => {
+        return updatedHoles[item] = true
+    })
+    setHolesOccupied(updatedHoles)
+}
 
 // GAME BEGINS ONLY WHEN COUNTDOWN IS ACTIVE
     useEffect(() => {
 
         if(cdActive) {
-            let randomAudio;
+            clearHoles()
             const intervalId = setInterval(() => {
 
-                setRandomAudio(prevRandomAudio => {
-
-                    switch(gameTopic) {
-                        case "Animals":
-                            randomAudio = animalAudioArray[Math.floor(Math.random() * animalAudioArray.length)].word;
-                            break;
-                        case "Colors":
-                            randomAudio = colorAudioArray[Math.floor(Math.random() * colorAudioArray.length)].word;
-                            break;
-                        case "Foods":
-                            randomAudio = foodAudioArray[Math.floor(Math.random() * foodAudioArray.length)].word;
-                            break;
-                        case "Body Parts":
-                            randomAudio = bodypartsAudioArray[Math.floor(Math.random() * bodypartsAudioArray.length)].word;
-                            break;
-                    }
-
-                    
-                    const audio = new Audio(randomAudio);
-                    audio.play();
-
-                    setTimeout(function() {
-                        const numOfHoles = Math.floor(Math.random() * 4) + 2
-                        let holesToPop = []
-                        for(let i = 0; i < numOfHoles; i++) {
-                            const holePop = Math.floor(Math.random() * holes.length)
-                            if(!holesToPop.includes(holePop)) {
-                                holesToPop.push(holePop)
-                            }
-                        }
-                        while(holesToPop.length < numOfHoles) {
-                            const holePop = Math.floor(Math.random() * holes.length)
-                            if(!holesToPop.includes(holePop)) {
-                                holesToPop.push(holePop)
-                            }
-                        }
-
-                        updatedHoles = Array(9).fill(null)
-                        holesToPop.forEach(item => {
-                            return updatedHoles[item] = true
-                        })
-                        setHolesOccupied(updatedHoles)
-                    }, 1000)
-                    // IMPORTANT: make larger, more obvkous delay and increase intervals and game time - better user experience!
-                    return randomAudio;
-                }); 
+                clearHoles()
+                
                 
             }, gameInterval.current);
     
