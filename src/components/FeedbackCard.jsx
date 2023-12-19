@@ -52,12 +52,12 @@ export default function FeedbackCard( { fbResults, deactivate } ) {
                     </table>
                 </div>
 
-                <div className={`feedback-form w-full ${formActive ? "block" : "hidden"}`}>
+                <div className={`feedback-form w-full ${formActive ? "block" : "hidden"} h-64 phone:h-96 px-5`}>
                     <form className="flex flex-wrap justify-around" action="http://localhost:8000/add_feedback.php" method="post" onSubmit={readFunction}>
 
-                        <input className="my-1 phone:my-2 p-1 rounded-md bg-darkergreen text-cream placeholder:text-cream shadow-md shadow-green w-3/5" type="text" name="user" defaultValue={playerName} placeholder="Enter name..." />
+                        <input className="my-3 phone:my-5 p-1 phone:p-2 rounded-md bg-darkergreen text-cream placeholder:text-cream shadow-md shadow-green flex-1 min-w-[8rem]" type="text" name="user" defaultValue={playerName} placeholder="Enter name..." />
 
-                        <select className="my-1 phone:my-2 p-1 rounded-md bg-darkergreen text-cream placeholder:text-cream shadow-md shadow-green"  name="rating" id="rating">
+                        <select className="my-3 phone:my-5 p-1 phone:p-2 rounded-md bg-darkergreen text-cream placeholder:text-cream shadow-md shadow-green ms-1 phone:ms-5"  name="rating" id="rating">
                             <option value="">Rating</option> 
                             <option value="10">10</option>
                             <option value="9">9</option>
@@ -71,16 +71,16 @@ export default function FeedbackCard( { fbResults, deactivate } ) {
                             <option value="1">1</option>
                         </select>
 
-                        <input className="my-1 mx-auto phone:my-2 p-1 rounded-md bg-darkergreen text-cream placeholder:text-cream shadow-md shadow-green w-4/5" type="text" name="comment" placeholder="Enter comment..." />
+                        <input className="my-3 mx-auto phone:my-5 p-1 phone:p-2 rounded-md bg-darkergreen text-cream placeholder:text-cream shadow-md shadow-green w-full" type="text" name="comment" placeholder="Enter comment..." />
 
-                        <button className="my-1 phone:my-3 mx-auto p-1 w-2/3 rounded-md bg-darkergreen text-cream font-bold tracking-wider shadow-md shadow-green hover:bg-darkgreen" type="submit" name="submit">Send Feedback!</button>
+                        <button className="my-1 phone:my-3 mx-auto p-1 phone:p-2 w-2/3 rounded-md bg-darkergreen text-cream font-bold tracking-wider phone:tracking-widest shadow-md shadow-green hover:bg-darkgreen max-w-[15rem]" type="submit" name="submit">Send Feedback!</button>
 
                     </form>
                 </div>
 
                 <footer className="flex flex-col phone:flex-row justify-evenly w-full">
 
-                    <Button btnTitle="Write Feedback" btnAction={writeFunction} className="text-lg phone:text-xl pt-2 phone:mt-5 hover:cursor-pointer hover:underline underline-offset-8" /> 
+                    <Button btnTitle="Write Feedback" btnAction={writeFunction} className={`text-lg phone:text-xl pt-2 phone:mt-5 hover:cursor-pointer hover:underline underline-offset-8 ${formActive ? "hidden" : "block"}`} /> 
 
                     <Button btnTitle="Exit Page" btnAction={returnMenuFunction} className="text-lg phone:text-xl pt-2 phone:mt-5 hover:cursor-pointer hover:underline underline-offset-8" /> 
 
