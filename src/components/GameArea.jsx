@@ -6,7 +6,7 @@ import smashSound from "../audio/boing.mp3"
 
 export default function GameArea( { mousemove } ) {
 
-    const [holesOccupied, setHolesOccupied, holes, animalArray, colorArray, foodArray, bodypartsArray, randomAudio, points, setPoints, menuActive, setMenuActive, playerName, setPlayerName, gameTopic, setGameTopic, gameDifficulty, setGameDifficulty, gameTime, setGameTime, cdActive, setCdActive, scoreFormActive, setScoreFormActive] = useContext(GameContext)
+    const [holesOccupied, setHolesOccupied, holes, animalArray, colorArray, foodArray, bodypartsArray, randomAudio, points, setPoints, menuActive, setMenuActive, playerName, setPlayerName, gameTopic, setGameTopic, gameDifficulty, setGameDifficulty, gameTime, setGameTime, cdActive, setCdActive, scoreFormActive, setScoreFormActive, correctAnswers, setCorrectAnswers, correctClicks, setCorrectClicks] = useContext(GameContext)
     
     let occupiedHoles = useRef([])
     const [randomVal, setRandomVal] = useState(0)
@@ -28,6 +28,8 @@ export default function GameArea( { mousemove } ) {
         const clickedImg = imgWordToMatch[4]
 
         if(wordCall === clickedImg) {
+            setCorrectAnswers(correctAnswers => correctAnswers + 1)
+            setCorrectClicks(correctClicks => correctClicks + 1)
             switch(gameDifficulty) {
                 case "Easy":
                     setPoints(points => points+1);
@@ -40,6 +42,8 @@ export default function GameArea( { mousemove } ) {
                     break;
             }
         } else {
+            setCorrectAnswers(correctAnswers => correctAnswers - 1)
+            setCorrectClicks(correctClicks => correctClicks - 1)
             switch(gameDifficulty) {
                 case "Easy":
                     setPoints(points => points-1);
@@ -59,6 +63,25 @@ export default function GameArea( { mousemove } ) {
         setHolesOccupied(updatedHoles)
         setImageClicked(true)
     }
+
+    useEffect(() => {
+        if(correctClicks === 2) {
+            console.log('Yay, multi points!')
+            switch(gameDifficulty) {
+                case "Easy":
+                    setPoints(points => points+5);
+                    break;
+                case "Medium":
+                    setPoints(points => points+25);
+                    break;
+                    case "Hard":
+                    setPoints(points => points+50);
+                    break;
+            }
+        }
+    }, [correctClicks])
+
+
 
     let randomValue;
     useEffect(() => {

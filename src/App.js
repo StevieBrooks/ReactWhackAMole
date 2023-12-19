@@ -286,17 +286,16 @@ function App() {
     const [gameTime, setGameTime] = useState()
     const [cdActive, setCdActive] = useState(false)
     const [scoreFormActive, setScoreFormActive] = useState(false)
+    const [correctAnswers, setCorrectAnswers] = useState(0)
+    const [correctClicks, setCorrectClicks] = useState(0)
 
     let gameInterval = useRef(5000)
 
-/* FOR ALGORITHM
-    - needs to be specific amount of correct images per game difficulty
-    - needs to be at least one correct image per call (to keep interesting)
-    - click two correct images per call - double points
-*/
+
 function clearHoles() {
     
     setHolesOccupied(Array(9).fill(null))
+    setCorrectClicks(0)
     audioSet()
 }
 
@@ -467,7 +466,6 @@ function populateHoles() {
         scoreXhr.addEventListener('readystatechange', function () {
             if (this.readyState === this.DONE) {
                 scoreResults.current = JSON.parse(this.responseText)
-                console.log(scoreResults)
             }
         });
 
@@ -481,7 +479,6 @@ function populateHoles() {
         fbXhr.addEventListener('readystatechange', function () {
             if (this.readyState === this.DONE) {
                 feedbackResults.current = JSON.parse(this.responseText)
-                console.log(feedbackResults)
             }
         });
 
@@ -564,7 +561,7 @@ function populateHoles() {
             <>
                 {/* <Header h1Title="Whack-a-Mole" /> */}
 
-                <GameContext.Provider value={[holesOccupied, setHolesOccupied, holes, animalArray, colorArray, foodArray, bodypartsArray, randomAudio, points, setPoints, menuActive, setMenuActive, playerName, setPlayerName, gameTopic, setGameTopic, gameDifficulty, setGameDifficulty, gameTime, setGameTime, cdActive, setCdActive, scoreFormActive, setScoreFormActive]}>
+                <GameContext.Provider value={[holesOccupied, setHolesOccupied, holes, animalArray, colorArray, foodArray, bodypartsArray, randomAudio, points, setPoints, menuActive, setMenuActive, playerName, setPlayerName, gameTopic, setGameTopic, gameDifficulty, setGameDifficulty, gameTime, setGameTime, cdActive, setCdActive, scoreFormActive, setScoreFormActive, correctAnswers, setCorrectAnswers, correctClicks,setCorrectClicks]}>
                     <TimeScore />
                     <GameArea mousemove={mousemoveFunction} />
                     <Footer countdownFunction={countdownFunction} resetFunction={resetFunction} menuFunction={menuFunction} mouseover={mouseoverFunction} mouseout={mouseoutFunction} />
