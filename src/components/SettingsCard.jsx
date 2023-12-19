@@ -71,7 +71,7 @@ export default function SettingsCard( { cardActive, setCardActive } ) {
                             <option value="Hard">Hard</option>
                         </select>
             
-                    <button className="my-3 phone:my-5 mx-auto p-2 w-2/3 rounded-md bg-darkergreen text-cream font-bold tracking-wider shadow-md shadow-green hover:bg-darkgreen" type="submit">Submit Form</button>
+                    <button className="my-3 phone:my-5 mx-auto p-2 w-2/3 rounded-md bg-darkergreen text-cream font-bold tracking-wider phone:tracking-widest max-w-[15rem] shadow-md shadow-green hover:bg-darkgreen" type="submit">Submit Form</button>
                 </form>
                 
                 <Button btnTitle="Exit Settings" btnAction={returnMenuFunction} className="text-xl py-5 hover:cursor-pointer hover:underline underline-offset-8" /> 
