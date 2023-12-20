@@ -9,7 +9,7 @@ include 'database.php';
     }
 
     if(isset($_GET)) {
-        $query = "SELECT * FROM playerfeedback";
+        $query = "SELECT * FROM playerfeedback ORDER BY date DESC";
 
         $result = $con->query($query);
 

@@ -8,7 +8,7 @@ export default function FeedbackCard( { fbResults, deactivate } ) {
 
     const [formActive, setFormActive] = useState(false)
 
-    const readFunction = () => {
+    const readFunction = (e) => {
         setFormActive(false)
     }
 
@@ -20,6 +20,11 @@ export default function FeedbackCard( { fbResults, deactivate } ) {
         setMenuActive(true)
         deactivate(false)
     }
+
+    const formatDate = (date) => {
+        return date.split('-').reverse().map((d, i) => i === 2 ? d.slice(-2) : d).join('.');
+    }
+
 
     console.log(fbResults)
 
@@ -42,7 +47,7 @@ export default function FeedbackCard( { fbResults, deactivate } ) {
                         <tbody className="relative top-3 text-center">
                             {fbResults.map((item, index) => {
                                 return <tr key={index} className="border-b border-cream border-dashed">
-                                            <td className="pe-2 py-2 hidden phone:table-cell">{item.date}</td>
+                                            <td className="pe-2 py-2 hidden phone:table-cell">{formatDate(item.date)}</td>
                                             <td className="pe-2 py-2">{item.user}</td>
                                             <td className="pe-2 py-2">{item.comment}</td>
                                             <td className="pe-2 py-2 font-bold text-2xl">{item.rating}</td>
