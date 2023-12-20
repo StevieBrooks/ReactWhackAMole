@@ -592,6 +592,6 @@ export default App;
 */
 
 
-/* SCOREFORM
-    - should only display if new high score is achieved for that topic and difficulty combo
-*/
+// NEED BETTER IMAGES
+// NEED BETTER WAY TO DISPLAY IMAGES
+// NEED TO CONGRAT WHEN MULTI POINTS SCORED, USE SCOREBOARD AND SFX

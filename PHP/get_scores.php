@@ -9,7 +9,7 @@ include 'database.php';
     }
 
     if(isset($_GET)) {
-        $query = "SELECT * FROM playerscore";
+        $query = "SELECT * FROM playerscore ORDER BY score DESC";
 
         $result = $con->query($query);
 
