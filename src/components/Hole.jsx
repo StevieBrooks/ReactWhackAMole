@@ -76,8 +76,11 @@ export default function Hole( { id, occupied, randomVal, clickHandler } ) {
     }
     
     return (
-        <div className={`hole ${id} rounded-full m-1 phone:m-3 w-20 phone:w-28 h-20 phone:h-28 bg-lightgreen shadow-inner shadow-darkergreen border-b border-darkergreen opacity-80 overflow-hidden`}>
-            <img src={occupied ? holeImage : ""} className="hole-image" onClick={(e) => clickHandler(e)} alt="" />
+        <div className={`hole ${id} rounded-full m-1 phone:m-3 w-20 phone:w-28 h-20 phone:h-28 bg-lightgreen shadow-inner shadow-darkergreen border-b border-darkergreen opacity-80 relative`}> 
+
+            <p className={`${occupied ? "hidden" : "block"} absolute top-1/2 -translate-y-1/2 text-cream inset-0 flex items-center justify-center z-10 text-5xl font-bold`}>{id + 1}</p>
+            <img src={occupied ? holeImage : ""} className="hole-image z-50 max-h-full absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2" onClick={(e) => clickHandler(e)} alt="" />
+
         </div>
     )
 }
